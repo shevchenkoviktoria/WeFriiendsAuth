@@ -30,9 +30,13 @@ const saveUser = (user, req, res) => {
     //         return res.send("Pending registration confirmation for " + userData.email);
     // });
     console.log("before save ", user)
-    user.save()
-    .then(item => console.log("nodemailer is about to send ", item))
-    .catch(err => console.log("error ", err));
+    user.save(function(err, doc) {
+        if (err) return console.error(err);
+        console.log("Document inserted succussfully! ", doc);
+      });
+    // user.save()
+    // .then(item => console.log("nodemailer is about to send ", item))
+    // .catch(err => console.log("error ", err));
     console.log("after save ")
     } catch(err) {
         console.log("in error")
