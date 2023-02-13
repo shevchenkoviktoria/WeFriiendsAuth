@@ -20,7 +20,6 @@ const SignUp = () => {
     const headers = { 
         'Content-Type': 'application/json;charset=UTF-8',
         "Access-Control-Allow-Origin": "*"
-        //  "https://clumsy-glasses-clam.cyclic.app",
     }
     
     const postForm = () => {
