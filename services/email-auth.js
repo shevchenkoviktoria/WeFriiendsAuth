@@ -6,7 +6,7 @@ let User = mongoose.model("users");
 
 module.exports.registerUser = async(userData, req,res) => {
     if (userData.password !== userData.password2) {
-        return res.status(400).json({ success: false, msg: 'Passwords do not match' });
+        return res.json({ msg: 'Passwords do not match' });
     }
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const token = jwt.sign(
@@ -23,13 +23,16 @@ module.exports.registerUser = async(userData, req,res) => {
 
 const saveUser = async(user, req, res) => {
     try {
-        user.save((err) => {
+        console.log("in try")
+        user.save(() => {
+            console.log("nodemailer is about to send")
             nodemailer.sendConfirmationEmail(userData.email, token);
             return res.status(200).json(
                 { msg: "Pending registration confirmation for " + userData.email
             });
     });
     } catch(err) {
+        console.log("in error")
         if (err.code === 11000) {
             return res.json(
                 { msg: "This email address is already associated with an account"

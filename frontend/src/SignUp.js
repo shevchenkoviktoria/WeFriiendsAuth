@@ -24,16 +24,16 @@ const SignUp = () => {
     
     const postForm = () => {
         console.log(email,password, password2)
-        axios.get('https://clumsy-glasses-clam.cyclic.app/api/auth/register', {id: 3, name: 'paul'})
-        // axios.post(
-        //     'https://clumsy-glasses-clam.cyclic.app/api/auth/register', 
-        //     {
-        //         email: email,
-        //         password: password,
-        //         password2: password2 
-        //     }, 
-        //     axiosConfig 
-        // )
+        // axios.get('https://clumsy-glasses-clam.cyclic.app/api/auth/register', {id: 3, name: 'paul'})
+        axios.post(
+            'https://clumsy-glasses-clam.cyclic.app/api/auth/register', 
+            {
+                email: email,
+                password: password,
+                password2: password2 
+            }, 
+            axiosConfig 
+        )
         .then((res) => {
             console.log('response received ', res.data.message)
         }).catch(err => {
