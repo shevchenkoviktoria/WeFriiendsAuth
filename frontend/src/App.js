@@ -1,6 +1,10 @@
 import './App.css';
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+    BrowserRouter,
+    Route,
+    Routes
+} from "react-router-dom";
 
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -22,5 +26,3 @@ function App() {
 }
 
 export default App;
-/*   ,
-  "proxy": "http://localhost:8080"*/
