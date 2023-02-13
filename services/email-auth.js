@@ -6,7 +6,7 @@ let User = mongoose.model("users");
 
 module.exports.registerUser = async(userData, req,res) => {
     if (userData.password !== userData.password2) {
-        return res.send({ msg: 'Passwords do not match' });
+        res.send('Passwords do not match');
     }
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const token = jwt.sign(
