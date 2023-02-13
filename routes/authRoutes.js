@@ -4,10 +4,6 @@ const userService = require("../services/email-auth.js");
 
 module.exports = (app) => {
   // ================    Email auth routes ======================== //
-app.get("/api/auth/register", (req,res) => {
-    console.log("get request works");
-    return res.json({message: "We did it"})
-})
 app.post("/api/auth/register", (req, res) => {
     console.log("in request")
     userService
@@ -16,7 +12,7 @@ app.post("/api/auth/register", (req, res) => {
             res.json({ message: msg });
         })
         .catch((msg) => {
-            res.status(422).json({ message: 'wrong' });
+            res.status(422).json({ message: msg });
         });
 });
 
