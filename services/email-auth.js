@@ -24,11 +24,14 @@ module.exports.registerUser = async(userData, req,res) => {
 const saveUser = async(user, req, res) => {
     try {
         console.log("in try ", user)
-        user.save((err) => {
-            console.log("nodemailer is about to send")
-            // nodemailer.sendConfirmationEmail(userData.email, token);
-            return res.send("Pending registration confirmation for " + userData.email);
-    });
+    //     user.save((err) => {
+    //         console.log("nodemailer is about to send")
+    //         // nodemailer.sendConfirmationEmail(userData.email, token);
+    //         return res.send("Pending registration confirmation for " + userData.email);
+    // });
+    user.save()
+    .then(res => console.log("nodemailer is about to send"))
+    .catch(err => console.log("error ", err))
     } catch(err) {
         console.log("in error")
         if (err.code === 11000) {
