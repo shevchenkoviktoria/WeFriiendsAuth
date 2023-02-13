@@ -14,17 +14,19 @@ const SignUp = () => {
     const axiosConfig = {
         headers: { 
             'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "http://localhost:3000",
+            "Access-Control-Allow-Origin": "*",
         }
     }
     const headers = { 
         'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Access-Control-Allow-Origin": "*"
+        //  "https://clumsy-glasses-clam.cyclic.app",
     }
     
     const postForm = () => {
+        console.log(email,password, password2)
         axios.post(
-            '/api/auth/register', 
+            'https://clumsy-glasses-clam.cyclic.app/api/auth/register', 
             {
                 email: email,
                 password: password,

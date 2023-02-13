@@ -5,14 +5,14 @@ const userService = require("../services/email-auth.js");
 module.exports = (app) => {
   // ================    Email auth routes ======================== //
 
-app.post("/api/auth/register", (req, res) => {
+app.post("https://clumsy-glasses-clam.cyclic.app/api/auth/register", (req, res) => {
     userService
         .registerUser(req.body)
         .then((msg) => {
             res.json({ message: msg });
         })
         .catch((msg) => {
-            res.status(422).json({ message: msg });
+            res.status(422).json({ message: 'wrong' });
         });
 });
 
