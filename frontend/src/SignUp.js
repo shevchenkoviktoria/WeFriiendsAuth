@@ -26,7 +26,7 @@ const SignUp = () => {
         console.log(email,password, password2)
         // axios.get('https://clumsy-glasses-clam.cyclic.app/api/auth/register', {id: 3, name: 'paul'})
         axios.post(
-            'https://clumsy-glasses-clam.cyclic.app/api/auth/register', 
+            '/api/auth/register', 
             {
                 email: email,
                 password: password,
@@ -35,7 +35,7 @@ const SignUp = () => {
             axiosConfig 
         )
         .then((res) => {
-            console.log('response received ', res.data.message)
+            console.log('response received ', res)
         }).catch(err => {
             console.log('error received', err)
         })
