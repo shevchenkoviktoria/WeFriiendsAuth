@@ -8,7 +8,7 @@ app.get("/api/auth/register", (req,res) => {
     console.log("get request works");
     return res.json({message: "We did it"})
 })
-app.post("https://clumsy-glasses-clam.cyclic.app/api/auth/register", (req, res) => {
+app.post("/api/auth/register", (req, res) => {
     console.log("in request")
     userService
         .registerUser(req.body)
