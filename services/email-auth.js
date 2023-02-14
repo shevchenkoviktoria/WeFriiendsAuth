@@ -27,7 +27,7 @@ module.exports.registerUser = async(userData, req,res) => {
     
 }
 
-const saveUser = (user, req, res) => {
+const saveUser = async(user, req, res) => {
     try {
       console.log("in save user ")
      user.save()
