@@ -12,6 +12,7 @@ const transport = nodemailer.createTransport({
 });
 
 module.exports.sendConfirmationEmail = (email, confirmationCode) => {
+    console.log("params ",email, confirmationCode);
     transport
         .sendMail({
             from: process.env.user,
