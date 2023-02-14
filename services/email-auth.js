@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("./nodemailer-service.js");
+const { nextTick } = require("process");
 let User = mongoose.model("users");
 
 module.exports.registerUser = async(userData, req,res) => {
@@ -19,8 +20,15 @@ module.exports.registerUser = async(userData, req,res) => {
         confirmationCode: token,
     });
 
-       await  saveUser(userToSave);
-       console.log("done")
+      // await  saveUser(userToSave);
+      await userToSave.save(function(err, doc, next) {
+        console.log("in function save")
+        if (err) return console.error(err);
+        console.log("Document inserted succussfully! ", doc);
+        next();
+      });
+      
+      console.log("done")
    
     
 }
@@ -34,10 +42,11 @@ const saveUser = (user, req, res) => {
     //         return res.send("Pending registration confirmation for " + userData.email);
     // });
     console.log("before save ", user)
-    user.save(function(err, doc) {
+    user.save(function(err, doc, next) {
         console.log("in function save")
         if (err) return console.error(err);
         console.log("Document inserted succussfully! ", doc);
+        next();
       });
     // user.save()
     // .then(item => console.log("nodemailer is about to send ", item))
