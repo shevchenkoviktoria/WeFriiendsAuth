@@ -33,7 +33,7 @@ const transport = nodemailer.createTransport({
 // };
 
 module.exports.sendConfirmationEmail = async(email, code) => {
-    console.log("in node mailer")
+    console.log("in node mailer");
     let info = await transport.sendMail({
         from: 'natasobl@hotmail.com', // sender address
         to: "natasobl@hotmail.com", // list of receivers
@@ -41,6 +41,6 @@ module.exports.sendConfirmationEmail = async(email, code) => {
         text: "Hello world?", // plain text body
         html: "<b>Hello world?</b>", // html body
       });
-    
+    console.log(info)
       console.log("Message sent: %s", info.messageId);
 }
