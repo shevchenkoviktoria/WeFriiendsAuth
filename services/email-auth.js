@@ -2,26 +2,31 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("./nodemailer-service.js");
-const { nextTick } = require("process");
+
 let User = mongoose.model("users");
 
 module.exports.registerUser = async(userData, req,res) => {
     if (userData.password !== userData.password2) {
         res.send('Passwords do not match');
     }
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    const hash = await bcrypt.hash(userData.password, 10);
+    userData.password = hash;
     const token = jwt.sign(
         { userId: userData.email },
         'secret'// process.env.JWT_SECRET
     );
-    let userToSave = new User({
+    let user = new User({
         userId: userData.email,
-        password: hashedPassword,
+        password:  userData.password,
         confirmationCode: token,
     });
+    console.log(user instanceof User);
 
       // await  saveUser(userToSave);
-    const match =  await User.findOne({userId: "natasobl@hotmail.com"}).exec();
+    const match =  await user.save((err, doc) => {
+        if (err) return console.error(err);
+        console.log(doc.userId + " saved to bookstore collection.");
+    })
       console.log(match)
       console.log("done")
    
