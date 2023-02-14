@@ -2,15 +2,15 @@ const nodemailer = require("nodemailer");
 
 // Configuring sender info for sending confirmation emails
 const transport = nodemailer.createTransport({
-    service: "gmail",
+    service: "Gmail",
   
-    // port: 587,
-    // secure: false,
+     port: 587,
+     secure: false,
     // requireTLS: true,
     auth: {
         type: 'OAuth2',
         user: 'wefriiends.confirm@gmail.com',
-        pass: 'grdbxdfdcosvawmq',
+        pass: 'women2022', //'grdbxdfdcosvawmq',
       
         clientId: process.env.CLIENTID,
         clientSecret: process.env.CLIENT_SECRET,
@@ -26,14 +26,9 @@ let mailOptions = {
   };
 
   module.exports.sendConfirmationEmail = (email, token) => {
-    transport.sendMail(mailOptions, function(err, data) {
-        console.log("inside sendEmail")
-        if (err) {
-          console.log("Error " + err);
-        } else {
-          console.log("Email sent successfully");
-        }
-      });
+    transport.sendMail(mailOptions, (err, doc) => {
+        console.log("in send mail")
+    });
   }
 
 // module.exports.sendConfirmationEmail = (email, confirmationCode) => {
