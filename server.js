@@ -39,12 +39,15 @@ mongoose.connect(
 );
 console.log("db connection")
 const db = mongoose.connection;
-console.log(db)
+
 db.on("error", console.error.bind(console, "connection error:"));
 
 db.once("open", function() {
   console.log("Connection Successful!");
 });
+db.once('connection', (stream) => {
+    console.log('Ah, we have our first user!');
+  });
 
 app.use(passport.initialize());
 app.use(passport.session());
