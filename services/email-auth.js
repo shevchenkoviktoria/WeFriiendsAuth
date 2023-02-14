@@ -99,3 +99,4 @@ module.exports.verifyUserEmail = (confirmationCode) => {
         .catch((err) => reject(err));
     });
 };
+
