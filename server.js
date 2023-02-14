@@ -56,6 +56,7 @@ mongoose.connect(
     console.log("Connected to Mongo DB");
   }
 );
+console.log(mongoose.connection.readyState); 
 
 app.use(passport.initialize());
 app.use(passport.session());
