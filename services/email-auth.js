@@ -20,11 +20,11 @@ module.exports.registerUser = async(userData, req,res) => {
         password:  userData.password,
         confirmationCode: token,
     });
-    console.log(user instanceof User);
+   
 
       // await  saveUser(userToSave);
-    const match =  await user.save((err, doc) => {
-        if (err) return console.error(err);
+    await user.save((err, doc) => {
+        if (err) return console.error("error here ",err);
         console.log(doc.userId + " saved to bookstore collection.");
     })
       console.log(match)
