@@ -23,17 +23,14 @@ module.exports.registerUser = async(userData, req,res) => {
    
    await saveUser(userToSave);
      
- //   await user.save()
-    
+ 
 }
 
 const saveUser = async(user, req, res) => {
     try {
       console.log("in save user ")
-     user.save()
-     .then(item => console.log(item))
-       
-        
+    await user.save();
+    
     //     ((err) => {
     //         console.log("nodemailer is about to send")
     //         // nodemailer.sendConfirmationEmail(userData.email, token);
