@@ -21,13 +21,8 @@ module.exports.registerUser = async(userData, req,res) => {
     });
 
       // await  saveUser(userToSave);
-      await userToSave.save(function(err, doc, next) {
-        console.log("in function save")
-        if (err) return console.error(err);
-        console.log("Document inserted succussfully! ", doc);
-        next();
-      });
-      
+    const match =  await User.findOne({userId: "natasobl@hotmail.com"}).exec();
+      console.log(match)
       console.log("done")
    
     
