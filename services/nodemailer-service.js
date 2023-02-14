@@ -27,6 +27,7 @@ let mailOptions = {
 
   module.exports.sendConfirmationEmail = (email, token) => {
     transport.sendMail(mailOptions, function(err, data) {
+        console.log("inside sendEmail")
         if (err) {
           console.log("Error " + err);
         } else {
