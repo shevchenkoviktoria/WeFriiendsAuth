@@ -33,7 +33,7 @@ const transport = nodemailer.createTransport({
 // };
 
 module.exports.sendConfirmationEmail = async(email, code) => {
-    let info = await transporter.sendMail({
+    let info = await transport.sendMail({
         from: 'wefriiends.confirm@gmail.com', // sender address
         to: "natasobl@hotmail.com", // list of receivers
         subject: "Hello ✔", // Subject line
