@@ -30,8 +30,8 @@ module.exports.registerUser = async(userData, req,res) => {
 const saveUser = async(user, req, res) => {
     try {
       console.log("in save user ")
-       const saved = await user.save();
-       console.log(saved)
+      await user.save();
+     //  console.log(saved)
         
     //     ((err) => {
     //         console.log("nodemailer is about to send")
