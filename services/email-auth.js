@@ -19,9 +19,9 @@ module.exports.registerUser = async(userData, req,res) => {
         confirmationCode: token,
     });
 
-    setTimeout(() => {
-        saveUser(userToSave);
-    }, 6000)
+       await  saveUser(userToSave);
+       console.log("done")
+   
     
 }
 
