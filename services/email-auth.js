@@ -21,19 +21,19 @@ module.exports.registerUser = async(userData, req,res) => {
         confirmationCode: token,
     });
    
-   await saveUser(userToSave, token);
+   await saveUser(userToSave, token, res);
      
  
 }
 
-const saveUser = async(user, req, res) => {
+const saveUser = async(user, res) => {
     try {
         const result = await user.save();
         if (result) {
            
             console.log("nodemailer is about to send");
             nodemailer.sendConfirmationEmail(user.userId, token);
-            // res.send("Pending registration confirmation for " + userData.email);
+             res.send("Pending registration confirmation for " + userData.email);
         } 
 
     } catch(err) {
