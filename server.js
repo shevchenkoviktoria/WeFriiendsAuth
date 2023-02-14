@@ -56,7 +56,10 @@ mongoose.connect(
     console.log("Connected to Mongo DB");
   }
 );
-console.log(mongoose.connection.readyState); 
+mongoose.connection.on('connected', () => {
+    console.log('connected');
+    console.log(mongoose.connection.readyState); //logs 1
+  }); 
 
 app.use(passport.initialize());
 app.use(passport.session());
