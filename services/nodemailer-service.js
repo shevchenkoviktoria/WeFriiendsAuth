@@ -2,9 +2,11 @@ const nodemailer = require("nodemailer");
 
 // Configuring sender info for sending confirmation emails
 const transport = nodemailer.createTransport({
-    service: "Gmail",
+    //service: "Gmail",
+    host: "smtp.gmail.com",
     port: 587,
-        secure: false,
+    secure: false,
+    requireTLS: true,
     auth: {
         user: 'wefriiends.confirm@gmail.com',
         pass: 'grdbxdfdcosvawmq',
