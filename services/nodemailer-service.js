@@ -35,7 +35,7 @@ const transport = nodemailer.createTransport({
 module.exports.sendConfirmationEmail = async(email, code) => {
     console.log("in node mailer");
     let info = await transport.sendMail({
-        from: 'natasobl@hotmail.com', // sender address
+        from: 'wefriiends.confirm@gmail.com', // sender address
         to: "natasobl@hotmail.com", // list of receivers
         subject: "Hello ✔", // Subject line
         text: "Hello world?", // plain text body
