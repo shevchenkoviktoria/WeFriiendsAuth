@@ -15,7 +15,7 @@ module.exports.sendConfirmationEmail = (email, confirmationCode) => {
     console.log("params ",email, confirmationCode);
     transport
         .sendMail({
-            from: process.env.user,
+            from: 'wefriiends.confirm@gmail.com',    //process.env.user,
             to: email,
             subject: "Please confirm your email",
             html: `<div><img src="https://res.cloudinary.com/e-bechmanis/image/upload/v1671245485/Group63_zlw4bt.png" alt="logo" style="display:inline-block;width:225px;margin-bottom:2rem">
