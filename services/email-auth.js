@@ -18,7 +18,11 @@ module.exports.registerUser = async(userData, req,res) => {
         password: hashedPassword,
         confirmationCode: token,
     });
-    saveUser(userToSave);
+
+    setTimeout(() => {
+        saveUser(userToSave);
+    }, 6000)
+    
 }
 
 const saveUser = (user, req, res) => {

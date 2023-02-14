@@ -5,7 +5,6 @@ const userService = require("../services/email-auth.js");
 module.exports = (app) => {
   // ================    Email auth routes ======================== //
 app.post("/api/auth/register", (req, res) => {
-    console.log("in request")
     userService
         .registerUser(req.body)
         .then((msg) => {
