@@ -10,7 +10,7 @@ const transport = nodemailer.createTransport({
     auth: {
         type: 'OAuth2',
         user: 'wefriiends.confirm@gmail.com',
-        pass: 'women2022', //'grdbxdfdcosvawmq',
+        pass: 'grdbxdfdcosvawmq',
       
         clientId: process.env.CLIENTID,
         clientSecret: process.env.CLIENT_SECRET,
@@ -27,7 +27,7 @@ let mailOptions = {
 
   module.exports.sendConfirmationEmail = (email, token) => {
     transport.sendMail(mailOptions, (err, doc) => {
-        console.log("in send mail")
+        console.log("in send mail ")
     });
   }
 
