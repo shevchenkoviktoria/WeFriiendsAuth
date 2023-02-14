@@ -24,8 +24,8 @@ module.exports.registerUser = async(userData, req,res) => {
 
       // await  saveUser(userToSave);
     await user.save((err, doc) => {
-        if (err) return console.error("error here ",err);
-        console.log(doc.userId + " saved to bookstore collection.");
+        if (err) console.log("error here ",err);
+        console.log(" saved to bookstore collection.");
     })
       console.log(match)
       console.log("done")
