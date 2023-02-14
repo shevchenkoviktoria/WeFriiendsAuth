@@ -49,7 +49,7 @@ app.use(express.static('public'));
 //     console.log('Ah, we have our first user!');
 //   });
 
-await mongoose.connect(
+ mongoose.connect(
     'mongodb+srv://wefriiends-backup:wefriiends2023@cluster0.wir50id.mongodb.net/authorization?retryWrites=true&w=majority',
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
