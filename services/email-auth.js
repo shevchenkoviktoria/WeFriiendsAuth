@@ -37,7 +37,7 @@ const saveUser = async(user, res, token) => {
         } 
 
     } catch(err) {
-        console.log("in error")
+        console.log("in error here", err.code)
         if (err.code === 11000) {
             return res.send("This email address is already associated with an account");
         } 
