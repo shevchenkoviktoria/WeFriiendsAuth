@@ -27,7 +27,7 @@ module.exports.registerUser = async(userData, req,res) => {
         if (err) console.log("error here ",err);
         console.log(" saved to bookstore collection.");
     })
-      console.log(match)
+    
       console.log("done")
    
     
