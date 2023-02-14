@@ -15,37 +15,30 @@ module.exports.registerUser = async(userData, req,res) => {
         { userId: userData.email },
         'secret'// process.env.JWT_SECRET
     );
-    let user = new User({
+    let userToSave = new User({
         userId: userData.email,
         password:  userData.password,
         confirmationCode: token,
     });
    
-
-      // await  saveUser(userToSave);
-    await user.save()
+    saveUser(userToSave);
+     
+ //   await user.save()
     
 }
 
-const saveUser = (user, req, res) => {
+const saveUser = async(user, req, res) => {
     try {
       console.log("in save user ")
-    //     user.save((err) => {
+       const saved = await user.save();
+       console.log(saved)
+        
+    //     ((err) => {
     //         console.log("nodemailer is about to send")
     //         // nodemailer.sendConfirmationEmail(userData.email, token);
     //         return res.send("Pending registration confirmation for " + userData.email);
     // });
-    console.log("before save ", user)
-    user.save(function(err, doc, next) {
-        console.log("in function save")
-        if (err) return console.error(err);
-        console.log("Document inserted succussfully! ", doc);
-        next();
-      });
-    // user.save()
-    // .then(item => console.log("nodemailer is about to send ", item))
-    // .catch(err => console.log("error ", err));
-    console.log("after save ")
+  
     } catch(err) {
         console.log("in error")
         if (err.code === 11000) {
