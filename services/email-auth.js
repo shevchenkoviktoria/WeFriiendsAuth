@@ -21,7 +21,7 @@ module.exports.registerUser = async(userData, req,res) => {
         confirmationCode: token,
     });
    
-    saveUser(userToSave);
+   await saveUser(userToSave);
      
  //   await user.save()
     
