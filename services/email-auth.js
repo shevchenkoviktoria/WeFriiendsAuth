@@ -35,6 +35,7 @@ const saveUser = (user, req, res) => {
     // });
     console.log("before save ", user)
     user.save(function(err, doc) {
+        console.log("in function save")
         if (err) return console.error(err);
         console.log("Document inserted succussfully! ", doc);
       });
