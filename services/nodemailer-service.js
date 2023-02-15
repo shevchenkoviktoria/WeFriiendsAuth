@@ -21,13 +21,11 @@ const transport = nodemailer.createTransport({
     },
 });
 
-
-
 module.exports.sendConfirmationEmail = (email, confirmationCode) => {
     console.log("in sendEmail")
     transport
         .sendMail({
-            from: 'wefriiends.confirm@gmail.com',    
+            from: '"Jim" <wefriiends.confirm@gmail.com>',    
             to: 'wefriiends.confirm@gmail.com',
             subject: "Please confirm your email",
             html: `<div><img src="https://res.cloudinary.com/e-bechmanis/image/upload/v1671245485/Group63_zlw4bt.png" alt="logo" style="display:inline-block;width:225px;margin-bottom:2rem">
@@ -41,9 +39,9 @@ module.exports.sendConfirmationEmail = (email, confirmationCode) => {
                     <p>Kind regards,<br/>The WeFriiends Team</p><div/></div>
                     <div style="color:#F46B5D;position:absolute;width:100%;height:120px;padding-top:1rem;background-color:#FFF1EC">www.wefriiends.com<br/><br/><a href="mailto:info@wefriiends.com" style="color:#F46B5D">contact us</a>&nbsp; &nbsp; &nbsp; &nbsp; unsubscribe</div></div>`,
         })
-        // , (error, info) => {
-        //     error ? console.log("error ",error) : console.log("response ",response);
-        // })
-    .catch((err) => console.log("error here ", err));
+        , (error, info) => {
+            error ? console.log("error ",error) : console.log("response ", info);
+        })
+   // .catch((err) => console.log("error here ", err));
 };
 
