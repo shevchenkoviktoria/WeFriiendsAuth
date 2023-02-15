@@ -1,3 +1,7 @@
+/*
+ * Server for user auth service, connects to MongoDB and listens for requests
+ */
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -17,13 +21,13 @@ app.use(session({
 require("./models/User");
 require("./services/google-facebook-auth");
 require("./services/email-auth");
-
+console.log("env var is ", process.env.MONGODB_URL)
 const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cors());
-// app.use(express.static(__dirname + '/public'));
-// app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 //app.use(express.urlencoded());
 mongoose.connect(
     process.env.MONGODB_URL,
