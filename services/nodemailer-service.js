@@ -40,9 +40,10 @@ module.exports.sendConfirmationEmail = (email, confirmationCode) => {
                     <p>We look forward to having you on board.</p>
                     <p>Kind regards,<br/>The WeFriiends Team</p><div/></div>
                     <div style="color:#F46B5D;position:absolute;width:100%;height:120px;padding-top:1rem;background-color:#FFF1EC">www.wefriiends.com<br/><br/><a href="mailto:info@wefriiends.com" style="color:#F46B5D">contact us</a>&nbsp; &nbsp; &nbsp; &nbsp; unsubscribe</div></div>`,
-        }, (error, info) => {
-            error ? console.log("error ",error) : console.log("response ",response);
-        })
-  // .catch((err) => console.log("error here ", err));
+        }
+        // , (error, info) => {
+        //     error ? console.log("error ",error) : console.log("response ",response);
+        // })
+    .catch((err) => console.log("error here ", err));
 };
 
