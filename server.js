@@ -1,7 +1,3 @@
-/*
- * Server for user auth service, connects to MongoDB and listens for requests
- */
-
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -26,40 +22,33 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static(__dirname + '/public'));
-app.use(express.static('public'));
+// app.use(express.static(__dirname + '/public'));
+// app.use(express.static('public'));
 //app.use(express.urlencoded());
-// mongoose.connect(
-//     'mongodb+srv://wefriiends-backup:wefriiends2023@cluster0.wir50id.mongodb.net/authorization?retryWrites=true&w=majority',
-//     { 
-//         useNewUrlParser: true, 
-//         useUnifiedTopology: true 
-//     },
-   
-// );
-// console.log("db connection")
-// const db = mongoose.connection;
-
-// db.on("error", console.error.bind(console, "connection error:"));
-
-// db.once("open", function() {
-//   console.log("Connection Successful!");
-// });
-// db.once('connection', (stream) => {
-//     console.log('Ah, we have our first user!');
-//   });
-
- mongoose.connect(
-    'mongodb+srv://wefriiends-backup:wefriiends2023@cluster0.wir50id.mongodb.net/authorization?retryWrites=true&w=majority',
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => {
-    console.log("Connected to Mongo DB");
-  }
+mongoose.connect(
+    process.env.MONGODB_URL,
+    { 
+        useNewUrlParser: true, 
+        useUnifiedTopology: true 
+    }
 );
-mongoose.connection.on('connected', () => {
-    console.log('connected');
-    console.log(mongoose.connection.readyState); //logs 1
-  }); 
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function() {
+    console.log("Connection Successful!");
+});
+
+//  mongoose.connect(
+//     'mongodb+srv://wefriiends-backup:wefriiends2023@cluster0.wir50id.mongodb.net/authorization?retryWrites=true&w=majority',
+//   { useNewUrlParser: true, useUnifiedTopology: true },
+//   () => {
+//     console.log("Connected to Mongo DB");
+//   }
+// );
+// mongoose.connection.on('connected', () => {
+//     console.log(mongoose.connection.readyState);
+// }); 
 
 app.use(passport.initialize());
 app.use(passport.session());

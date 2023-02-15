@@ -33,5 +33,7 @@ module.exports.sendConfirmationEmail = async(email, confirmationCode) => {
                     <p>Kind regards,<br/>The WeFriiends Team</p><div/></div>
                     <div style="color:#F46B5D;position:absolute;width:100%;height:120px;padding-top:1rem;background-color:#FFF1EC">www.wefriiends.com<br/><br/><a href="mailto:info@wefriiends.com" style="color:#F46B5D">contact us</a>&nbsp; &nbsp; &nbsp; &nbsp; unsubscribe</div></div>`,
         })
-        console.log("info ",info)
+        if (!info.messageId) {
+            console.log("Something went wrong while sending the confirmation email")
+        }
 };
