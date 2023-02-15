@@ -27,7 +27,7 @@ module.exports.registerUser = async(userData, req,res) => {
 }
 
 const saveUser = async(user, res, token) => {
-    try {
+  //  try {
         const result = await user.save();
         if (result) {
          
@@ -36,13 +36,13 @@ const saveUser = async(user, res, token) => {
             //  res.send("Pending registration confirmation for " + user.useId);
         } 
 
-    } catch(err) {
-        console.log("in error here", err.code)
-        if (err.code === 11000) {
-            return res.send("This email address is already associated with an account");
-        } 
-        return res.send("There was an error creating the user: " + err);
-    }
+    // } catch(err) {
+    //     console.log("in error here", err.code)
+    //     if (err.code === 11000) {
+    //         return res.send("This email address is already associated with an account");
+    //     } 
+    //     return res.send("There was an error creating the user: " + err);
+    // }
 }
 
 module.exports.checkUser = async(userData) => {
