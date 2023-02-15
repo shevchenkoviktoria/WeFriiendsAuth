@@ -10,7 +10,7 @@ const transport = nodemailer.createTransport({
     auth: {
         type: 'OAuth2',
         user: 'wefriiends.confirm@gmail.com',
-        pass: 'grdbxdfdcosvawmq',
+        pass: 'women2022', //'grdbxdfdcosvawmq',
         tls: {
             rejectUnauthorized: false
         },
@@ -21,25 +21,13 @@ const transport = nodemailer.createTransport({
     },
 });
 
-// let mailOptions = {
-//     from: 'wefriiends.confirm@gmail.com',
-//     to: 'wefriiends.confirm@gmail.com',
-//     subject: 'Nodemailer Project',
-//     text: 'Hi from your nodemailer project'
-// };
 
-//   module.exports.sendConfirmationEmail = (email, token) => {
-//     console.log("in sendConfirmationEmail ", process.env.CLIENT_ID)
-//     transport.sendMail(mailOptions, (err, res) => {
-//         error ? console.log('error in nodemailer', err) : console.log('in send email ',res);
-//     });
-//   }
 
 module.exports.sendConfirmationEmail = (email, confirmationCode) => {
     console.log("in sendEmail")
     transport
         .sendMail({
-            from: 'wefriiends.confirm@gmail.com',    //process.env.user,
+            from: 'wefriiends.confirm@gmail.com',    
             to: 'wefriiends.confirm@gmail.com',
             subject: "Please confirm your email",
             html: `<div><img src="https://res.cloudinary.com/e-bechmanis/image/upload/v1671245485/Group63_zlw4bt.png" alt="logo" style="display:inline-block;width:225px;margin-bottom:2rem">
