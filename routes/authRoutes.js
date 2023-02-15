@@ -32,12 +32,12 @@ app.post("/api/auth/signin", (req, res) => {
   });
 
   app.get("/api/auth/confirm/:confirmationCode", (req, res) => {
-    userService
-      .verifyUserEmail(req.params.confirmationCode)
-      .then((msg) => res.json({ message: msg }))
-      .catch((msg) => {
-        res.status(422).json({ message: msg });
-      });
+        userService
+            .verifyUserEmail(req.params.confirmationCode)
+            .then((msg) => res.json({ message: msg }))
+            .catch((msg) => {
+            res.status(422).json({ message: msg });
+        });
   });
 
   // ====================  Google auth routes =========================== //
@@ -47,7 +47,7 @@ app.post("/api/auth/signin", (req, res) => {
     );
 
     app.get("/api/auth/google/callback", (req, res, next) => {
-        console.log('here')
+        console.log('here in google auth')
         passport.authenticate("google", (err, user, info) => {
             console.log("User has been successfully authenticated with Google");
             let payload = {

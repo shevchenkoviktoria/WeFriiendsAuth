@@ -20,17 +20,16 @@ passport.deserializeUser((id, done) => {
 
 // Google Auth
 passport.use(
-  new GoogleStrategy(
-    {
-      clientID: '681911775744-38tdbjb6qsrejqre35ce5ems8sg7hnje.apps.googleusercontent.com', //process.env.GOOGLE_CLIENT_ID,
-      clientSecret: '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', //process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/api/auth/google/callback",
-      passReqToCallback : true
+    new GoogleStrategy({
+       clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_AUTH_SECRET,
+        callbackURL: "/api/auth/google/callback",
+        passReqToCallback : true
     },
     (accessToken, refreshToken, profile, done) => {
       console.log(profile);
       // check if user id already exists
-      User.findOne({ userId: profile.id }).then((existingUser) => {
+        User.findOne({ userId: profile.id }).then((existingUser) => {
         if (existingUser) {
           done(null, existingUser);
         } else {
@@ -80,11 +79,3 @@ passport.use(
 //   )
 // );
 
-
-
-/*
-clientID 681911775744-38tdbjb6qsrejqre35ce5ems8sg7hnje.apps.googleusercontent.com
-*/
-/*
-client secret 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
- */
