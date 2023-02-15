@@ -1,15 +1,10 @@
 const nodemailer = require("nodemailer");
-
-// Configuring sender info for sending confirmation emails
-const transport = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
     service: "Gmail",
-    //  port: 587,
-    //  secure: false,
-    // requireTLS: true,
     auth: {
         type: 'OAuth2',
-        user: 'wefriiends.confirm@gmail.com',
-        pass: 'grdbxdfdcosvawmq',
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASSWORD,
         tls: {
             rejectUnauthorized: false
         },
@@ -21,11 +16,10 @@ const transport = nodemailer.createTransport({
 });
 
 module.exports.sendConfirmationEmail = async(email, confirmationCode) => {
-    console.log("in sendEmail")
-   const info = await transport
+    const info = await transporter
         .sendMail({
-            from: 'wefriiends.confirm@gmail.com',    
-            to: 'wefriiends.confirm@gmail.com',
+            from: process.env.USER,    
+            to: email,
             subject: "Please confirm your email",
             html: `<div><img src="https://res.cloudinary.com/e-bechmanis/image/upload/v1671245485/Group63_zlw4bt.png" alt="logo" style="display:inline-block;width:225px;margin-bottom:2rem">
              <div style="font-family:sans-serif;font-size:14px;line-height:22px"><h2 style="color:#F46B5D;margin-bottom:3rem">Confirm email</h2>
@@ -38,8 +32,5 @@ module.exports.sendConfirmationEmail = async(email, confirmationCode) => {
                     <p>Kind regards,<br/>The WeFriiends Team</p><div/></div>
                     <div style="color:#F46B5D;position:absolute;width:100%;height:120px;padding-top:1rem;background-color:#FFF1EC">www.wefriiends.com<br/><br/><a href="mailto:info@wefriiends.com" style="color:#F46B5D">contact us</a>&nbsp; &nbsp; &nbsp; &nbsp; unsubscribe</div></div>`,
         })
-        console.log("info ",info.messageId)
-       
-   // .catch((err) => console.log("error here ", err));
+        console.log("info ",info)
 };
-
