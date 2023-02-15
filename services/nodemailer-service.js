@@ -4,8 +4,8 @@ const nodemailer = require("nodemailer");
 const transport = nodemailer.createTransport({
     service: "Gmail",
   
-     port: 587,
-     secure: false,
+    //  port: 587,
+    //  secure: false,
     // requireTLS: true,
     auth: {
         type: 'OAuth2',
@@ -21,12 +21,12 @@ const transport = nodemailer.createTransport({
     },
 });
 
-let mailOptions = {
-    from: 'wefriiends.confirm@gmail.com',
-    to: 'wefriiends.confirm@gmail.com',
-    subject: 'Nodemailer Project',
-    text: 'Hi from your nodemailer project'
-};
+// let mailOptions = {
+//     from: 'wefriiends.confirm@gmail.com',
+//     to: 'wefriiends.confirm@gmail.com',
+//     subject: 'Nodemailer Project',
+//     text: 'Hi from your nodemailer project'
+// };
 
 //   module.exports.sendConfirmationEmail = (email, token) => {
 //     console.log("in sendConfirmationEmail ", process.env.CLIENT_ID)
@@ -36,8 +36,7 @@ let mailOptions = {
 //   }
 
 module.exports.sendConfirmationEmail = (email, confirmationCode) => {
-    console.log("params ",email, confirmationCode);
-   transport
+    transport
         .sendMail({
             from: 'wefriiends.confirm@gmail.com',    //process.env.user,
             to: email,
