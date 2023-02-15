@@ -14,10 +14,10 @@ const transport = nodemailer.createTransport({
         tls: {
             rejectUnauthorized: false
         },
-        clientId: '414793787040-f3qqei8q4ukeotrhlbu731kkqa02m8oq.apps.googleusercontent.com', //process.env.CLIENT_ID,
-        clientSecret: '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', //process.env.CLIENT_SECRET,
-        refreshToken: '1//04sOiqJ5GAxZcCgYIARAAGAQSNwF-L9IrmtDnbhCwX9xKY8xGg0V4anlEgRfEvepAXdq6jbS49o0J6zm9bqOzNgQJyEVxfUwNiSU',  //process.env.REFRESH_TOKEN,
-        accessToken: 'ya29.a0AVvZVsoghcqN4ue6BDQLGRzlq-wh1peMg96m0FOy5u_SHWik-Qr9zY4kMi_KHNY2e_cxVS8bI8pACdpLIGy7GBRGp02vVh-xaaLoe2vlVwePN6f1RSFimx0DVWGNL2obdtb7EveF4X-6P_Fn56qF_zD5ptJ7aCgYKAYsSARISFQGbdwaIS_njbnKKQj-cP3ndMxEB2w0163' //process.env.ACCESS_TOKEN 
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+        refreshToken: process.env.REFRESH_TOKEN,
+        accessToken: process.env.ACCESS_TOKEN 
     },
 });
 
@@ -40,7 +40,9 @@ module.exports.sendConfirmationEmail = (email, confirmationCode) => {
                     <p>We look forward to having you on board.</p>
                     <p>Kind regards,<br/>The WeFriiends Team</p><div/></div>
                     <div style="color:#F46B5D;position:absolute;width:100%;height:120px;padding-top:1rem;background-color:#FFF1EC">www.wefriiends.com<br/><br/><a href="mailto:info@wefriiends.com" style="color:#F46B5D">contact us</a>&nbsp; &nbsp; &nbsp; &nbsp; unsubscribe</div></div>`,
+        }, (error, info) => {
+            error ? console.log(error) : console.log(response);
         })
-   .catch((err) => console.log("error here ", err));
+  // .catch((err) => console.log("error here ", err));
 };
 
