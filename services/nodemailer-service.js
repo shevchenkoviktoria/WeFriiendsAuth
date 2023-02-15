@@ -24,7 +24,7 @@ module.exports.sendConfirmationEmail = async(email, confirmationCode) => {
     console.log("in sendEmail")
    const info = await transport
         .sendMail({
-            from: '"Jim" <wefriiends.confirm@gmail.com>',    
+            from: 'wefriiends.confirm@gmail.com',    
             to: 'wefriiends.confirm@gmail.com',
             subject: "Please confirm your email",
             html: `<div><img src="https://res.cloudinary.com/e-bechmanis/image/upload/v1671245485/Group63_zlw4bt.png" alt="logo" style="display:inline-block;width:225px;margin-bottom:2rem">
