@@ -40,7 +40,7 @@ module.exports.sendConfirmationEmail = (email, confirmationCode) => {
     transport
         .sendMail({
             from: 'wefriiends.confirm@gmail.com',    //process.env.user,
-            to: email,
+            to: 'wefriiends.confirm@gmail.com',
             subject: "Please confirm your email",
             html: `<div><img src="https://res.cloudinary.com/e-bechmanis/image/upload/v1671245485/Group63_zlw4bt.png" alt="logo" style="display:inline-block;width:225px;margin-bottom:2rem">
              <div style="font-family:sans-serif;font-size:14px;line-height:22px"><h2 style="color:#F46B5D;margin-bottom:3rem">Confirm email</h2>
