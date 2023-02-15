@@ -27,7 +27,7 @@ module.exports.registerUser = async(userData, req,res) => {
 }
 
 const saveUser = async(user, res, token) => {
-  //  try {
+    try {
         const result = await user.save();
         if (result) {
          
@@ -39,7 +39,7 @@ const saveUser = async(user, res, token) => {
     } catch(err) {
         console.log("in error here", err.code)
         if (err.code === 11000) {
-           console.log("This email address is already associated with an account");
+           return console.log("This email address is already associated with an account");
         } 
         console.log("There was an error creating the user: " + err);
     }
