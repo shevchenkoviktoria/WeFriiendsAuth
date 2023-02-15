@@ -10,14 +10,14 @@ const transport = nodemailer.createTransport({
     auth: {
         type: 'OAuth2',
         user: 'wefriiends.confirm@gmail.com',
-        pass: 'women2022', //'grdbxdfdcosvawmq',
+        pass: 'grdbxdfdcosvawmq',
         tls: {
             rejectUnauthorized: false
         },
-        clientId: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
-        refreshToken: process.env.REFRESH_TOKEN,
-        accessToken: process.env.ACCESS_TOKEN 
+        clientId: '414793787040-f3qqei8q4ukeotrhlbu731kkqa02m8oq.apps.googleusercontent.com', //process.env.CLIENT_ID,
+        clientSecret: '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', //process.env.CLIENT_SECRET,
+        refreshToken: '1//04sOiqJ5GAxZcCgYIARAAGAQSNwF-L9IrmtDnbhCwX9xKY8xGg0V4anlEgRfEvepAXdq6jbS49o0J6zm9bqOzNgQJyEVxfUwNiSU',  //process.env.REFRESH_TOKEN,
+        accessToken: 'ya29.a0AVvZVsoghcqN4ue6BDQLGRzlq-wh1peMg96m0FOy5u_SHWik-Qr9zY4kMi_KHNY2e_cxVS8bI8pACdpLIGy7GBRGp02vVh-xaaLoe2vlVwePN6f1RSFimx0DVWGNL2obdtb7EveF4X-6P_Fn56qF_zD5ptJ7aCgYKAYsSARISFQGbdwaIS_njbnKKQj-cP3ndMxEB2w0163' //process.env.ACCESS_TOKEN 
     },
 });
 
