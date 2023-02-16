@@ -16,7 +16,7 @@ function App() {
     const [token, setToken] = useState(null);
     
     useEffect(() => {
-        getToken();
+      //  getToken();
     }, []);
 
     const getToken = async() => {

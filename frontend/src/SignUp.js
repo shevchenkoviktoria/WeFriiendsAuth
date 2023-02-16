@@ -18,7 +18,8 @@ const SignUp = () => {
         }
     }
     
-    const postForm = () => {
+    const postForm = async () => {
+        console.log("in post ", email, password, password2);
         axios.post(
             '/api/auth/register', 
             {

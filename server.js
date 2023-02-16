@@ -32,6 +32,12 @@ mongoose.connect(
     }
 );
 
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+require("./routes/authRoutes")(app);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function() {
@@ -40,10 +46,5 @@ db.once("open", function() {
         console.log("API listening on: " + HTTP_PORT);
       });
 });
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-require("./routes/authRoutes")(app);
 
 
