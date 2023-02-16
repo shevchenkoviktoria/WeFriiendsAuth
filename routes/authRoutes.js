@@ -4,11 +4,11 @@ const userService = require("../services/email-auth.js");
 
 module.exports = (app) => {
   // ================    Email auth routes ======================== //
+  
     app.post("/api/auth/register", (req, res) => {
         userService
             .registerUser(req.body)
             .then((msg) => {
-                console.log("msg ", msg)
                 res.json({ message: msg });
             })
             .catch((msg) => {
