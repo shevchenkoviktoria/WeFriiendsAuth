@@ -21,7 +21,7 @@ const SignUp = () => {
     const postForm = async () => {
         console.log("in post ", email, password, password2);
         axios.post(
-            '/api/auth/register', 
+            'https://clumsy-glasses-clam.cyclic.app/api/auth/register', 
             {
                 email: email,
                 password: password,

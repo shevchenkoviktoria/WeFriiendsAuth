@@ -24,6 +24,11 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static('public'))
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+require("./routes/authRoutes")(app);
+
 mongoose.connect(
     'mongodb+srv://wefriiends-backup:wefriiends2023@cluster0.wir50id.mongodb.net/authorization?retryWrites=true&w=majority',
     { 
@@ -31,21 +36,11 @@ mongoose.connect(
         useUnifiedTopology: true 
     }
 );
-
-
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-require("./routes/authRoutes")(app);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function() {
     console.log("Connection Successful!");
-    
+    app.listen(HTTP_PORT, () => {
+        console.log("API listening on: " + HTTP_PORT);
+    });
 });
-app.listen(HTTP_PORT, () => {
-    console.log("API listening on: " + HTTP_PORT);
-  });
-
-
