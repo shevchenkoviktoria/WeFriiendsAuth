@@ -13,7 +13,7 @@ module.exports.registerUser = async(userData, req,res) => {
     userData.password = hash;
     const token = jwt.sign(
         { userId: userData.email },
-        'secret'// process.env.JWT_SECRET
+        process.env.JWT_SECRET
     );
     let userToSave = new User({
         userId: userData.email,
@@ -21,57 +21,50 @@ module.exports.registerUser = async(userData, req,res) => {
         confirmationCode: token,
     });
    
-   await saveUser(userToSave, res, token);
-     
- 
+    const response = await saveUser(userToSave, token);
+    return response;
 }
 
-const saveUser = async(user, res, token) => {
+const saveUser = async(user, token) => {
     try {
         const result = await user.save();
         if (result) {
-         
-            console.log("nodemailer is about to send");
             await nodemailer.sendConfirmationEmail(result.userId, token);
-            //  res.send("Pending registration confirmation for " + user.useId);
+            return (`Pending registration confirmation for ${result.userId}`);
         } 
 
     } catch(err) {
-        console.log("in error here", err.code)
         if (err.code === 11000) {
-           return console.log("This email address is already associated with an account");
+           return ("This email address is already associated with an account");
         } 
-        console.log("There was an error creating the user: " + err);
+        return(`There was an error creating the user: ${err}`);
     }
 }
 
-module.exports.checkUser = async(userData) => {
-    try {
-        const user = await User.findOne({ userId: userData.email });
-        if (!user) {
-            return res.status(400).send('Invalid email or password!')
-        }
-        const isUserValid = await bcrypt.compare(userData.password, user.password);
-        if (isUserValid) {
-            if (user.status !== 'Active') {
-                return res.json({
-                    msg: "Pending Account. Please verify your email to gain access to your profile"
-                });
+module.exports.checkUser = (userData) => {
+    return new Promise(function (resolve, reject) {
+      User.findOne({ userId: userData.email })
+        .exec()
+        .then((user) => {
+          bcrypt.compare(userData.password, user.password).then((res) => {
+            if (user.status != "Active") {
+              reject(
+                "Pending Account. Please verify your email to gain access to your profile"
+              );
             }
-            return res.json({msg: "User is signed in"});
-        } else {
-            return res.json({
-                msg: "Incorrect password for user " + userData.email
-            })
-        }
-    } catch(err) {
-        return res.json({
-            message: "Unable to find user " + userData.email
+            if (res === true) {
+              resolve(user);
+            } else {
+              reject("Incorrect password for user " + userData.email);
+            }
+          });
         })
-    }
-};
-
-// This function checks confirmationCode in the database and changes user status to Active if a match found
+        .catch((err) => {
+          reject("Unable to find user " + userData.email);
+        });
+    });
+  };
+  
 module.exports.verifyUserEmail = (confirmationCode) => {
     return new Promise(function (resolve, reject) {
         User.findOne({

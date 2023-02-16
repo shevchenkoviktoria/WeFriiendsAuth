@@ -1,7 +1,3 @@
-/*
- * User auth passport strategy for Facebook and Gmail
- */
-
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
@@ -9,41 +5,40 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+    done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id).then((user) => {
-    done(null, user);
-  });
+    User.findById(id).then((user) => {
+        done(null, user);
+    });
 });
 
 // Google Auth
 passport.use(
     new GoogleStrategy({
-       clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
+        clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
         clientSecret: process.env.GOOGLE_AUTH_SECRET,
-        callbackURL: "/api/auth/google/callback",
-        passReqToCallback : true
+        callbackURL: "/api/auth/google/callback"
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
+     
       // check if user id already exists
         User.findOne({ userId: profile.id }).then((existingUser) => {
-        if (existingUser) {
-          done(null, existingUser);
-        } else {
+            if (existingUser) {
+            done(null, existingUser);
+            } else {
           // adding new user
-          new User({
-            userId: profile.id,
-            status: "Active",
-          })
-            .save()
-            .then((user) => {
-              done(null, user);
-            });
-        }
-      });
+                new User({
+                    userId: profile.id,
+                    status: "Active",
+                })
+                .save()
+                .then((user) => {
+                    done(null, user);
+                });
+            }
+        });
     }
   )
 );

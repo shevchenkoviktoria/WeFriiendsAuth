@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
 const session = require('express-session')
 app.use(session({
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    secret: process.env.JWT_SECRET,
     saveUninitialized:true,
     cookie: { maxAge: oneDay },
     resave: false 
@@ -22,9 +22,7 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static(__dirname + '/public'));
-app.use(express.static('public'));
-//app.use(express.urlencoded());
+
 mongoose.connect(
     process.env.MONGODB_URL,
     { 
