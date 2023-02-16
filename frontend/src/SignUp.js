@@ -37,7 +37,6 @@ const SignUp = () => {
     
     const googleSignIn = () => {
         window.open("http://localhost:8080/api/auth/google");
-       
     }
 
     const facebookSignIn = () => {
