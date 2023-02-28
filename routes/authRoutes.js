@@ -46,7 +46,7 @@ module.exports = (app) => {
         passport.authenticate("google", { scope: ["email"] })
     );
     
-    app.get("/login/failed", (req,res) => {
+    app.get("/api/auth/login/failed", (req,res) => {
         res.status(401).json({
             success: false, 
             message: 'Failure of login attempt'
