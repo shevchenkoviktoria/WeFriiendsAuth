@@ -68,10 +68,12 @@ module.exports = (app) => {
             })
         }
     });
+
+
     
     app.get("/api/auth/google/callback", passport.authenticate('google', {
-        successRedirect: "http://localhost:3000",
-        failureRedirect: "http://localhost:3000/signin"
+        successRedirect: "/api/auth/login/success",
+        failureRedirect: "/api/auth/login/failed"
     }));
 
   // ==================  Facebook auth routes ======================== //
