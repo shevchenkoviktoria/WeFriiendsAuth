@@ -15,33 +15,33 @@ passport.deserializeUser((id, done) => {
 });
 
 // Google Auth
-// passport.use(
-//     new GoogleStrategy({
-//         clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
-//         clientSecret: process.env.GOOGLE_AUTH_SECRET,
-//         callbackURL: "/api/auth/google/callback"
-//     },
-//     (accessToken, refreshToken, profile, done) => {
+passport.use(
+    new GoogleStrategy({
+        clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_AUTH_SECRET,
+        callbackURL: "/api/auth/google/callback"
+    },
+    (accessToken, refreshToken, profile, done) => {
      
-//       // check if user id already exists
-//         User.findOne({ userId: profile.id }).then((existingUser) => {
-//             if (existingUser) {
-//             done(null, existingUser);
-//             } else {
-//           // adding new user
-//                 new User({
-//                     userId: profile.id,
-//                     status: "Active",
-//                 })
-//                 .save()
-//                 .then((user) => {
-//                     done(null, user);
-//                 });
-//             }
-//         });
-//     }
-//   )
-// );
+      // check if user id already exists
+        User.findOne({ userId: profile.id }).then((existingUser) => {
+            if (existingUser) {
+            done(null, existingUser);
+            } else {
+          // adding new user
+                new User({
+                    userId: profile.id,
+                    status: "Active",
+                })
+                .save()
+                .then((user) => {
+                    done(null, user);
+                });
+            }
+        });
+    }
+  )
+);
 
 // Facebook Auth
 // passport.use(
