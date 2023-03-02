@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
-index[userSchema.options.discriminatorKey] = 1;
-userSchema.index(index, { unique: true, sparse: true });
-
 const userSchema = new Schema({
   userId: {
     type: String,
@@ -19,7 +15,6 @@ const userSchema = new Schema({
   confirmationCode: {
     type: String,
     unique: true,
-    index: { unique: true, sparse: true }
   }
 });
 
