@@ -15,7 +15,6 @@ const userSchema = new Schema({
   confirmationCode: {
     type: String,
     unique: true,
-    sparse: true
   },
 });
 
