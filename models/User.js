@@ -15,7 +15,7 @@ const userSchema = new Schema({
   confirmationCode: {
     type: String,
     unique: true,
-    partialFilterExpression: {confirmationCode: {$type: "string"}}
+    sparse: true
   },
 });
 

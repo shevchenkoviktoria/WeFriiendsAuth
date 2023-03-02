@@ -30,7 +30,7 @@ passport.use(
                 console.log("user exists")
             done(null, existingUser);
             } else {
-                console.log("about to add a new user with id", profile.emails[0].value)
+                console.log("about to add a new user with id", profile)
           // adding new user
           const userToSave = new User({
             userId: profile.emails[0].value,
