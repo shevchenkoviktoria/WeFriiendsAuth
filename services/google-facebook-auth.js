@@ -21,26 +21,29 @@ passport.use(
         clientSecret: process.env.GOOGLE_AUTH_SECRET,
         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback"
     },
-    (accessToken, refreshToken, profile, done) => {
+     (accessToken, refreshToken, profile, done) => {
      
       // check if user id already exists
      // const user = User.findOne({userId: profile.id})
-        User.findOne({ userId: profile.id }).then((existingUser) => {
+        User.findOne({ userId: profile.id }).then(async (existingUser) => {
             if (existingUser) {
                 console.log("user exists")
             done(null, existingUser);
             } else {
                 console.log("about to add a new user with id", profile)
           // adding new user
-                new User({
-                    userId: profile.id,
-                    status: "Active",
-                    confirmationCode: null
-                })
-                .save()
-                .then((user) => {
-                    done(null, user);
-                });
+          const userToSave = new User({
+            userId: profile.id,
+            status: "Active",
+            //confirmationCode: null
+        });
+
+        const result = await userToSave.save();
+        done(null, result)
+                // .save()
+                // .then((user) => {
+                //     done(null, user);
+                // });
             }
         });
     }
