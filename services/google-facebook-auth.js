@@ -24,10 +24,13 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
      
       // check if user id already exists
+     // const user = User.findOne({userId: profile.id})
         User.findOne({ userId: profile.id }).then((existingUser) => {
             if (existingUser) {
+                console.log("user exists")
             done(null, existingUser);
             } else {
+                console.log("about to add a new user")
           // adding new user
                 new User({
                     userId: profile.id,
