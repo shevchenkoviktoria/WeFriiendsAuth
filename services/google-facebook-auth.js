@@ -36,7 +36,7 @@ passport.use(
             userId: profile.emails[0].value,
             googleId: profile.id,
             status: "Active",
-            //confirmationCode: null
+            confirmationCode: '123456'
         });
 
         const result = await userToSave.save();
