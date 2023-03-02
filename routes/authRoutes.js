@@ -47,6 +47,7 @@ module.exports = (app) => {
     );
     
     app.get("/api/auth/login/failed", (req,res) => {
+        console.log("in login failed")
         res.status(401).json({
             success: false, 
             message: 'Failure of login attempt'
