@@ -69,7 +69,7 @@ module.exports = (app) => {
                 token: token
             })
         } else {
-            console.log("there is an error in login")
+            res.send({message: "User not Authorized"})
         }
     });
     
