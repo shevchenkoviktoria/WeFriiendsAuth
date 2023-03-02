@@ -7,6 +7,7 @@ const userSchema = new Schema({
     required: true
   },
   password: String,
+  googleId: String,
   status: {
     type: String,
     enum: ["Pending", "Active"],

@@ -25,7 +25,7 @@ passport.use(
      
       // check if user id already exists
      // const user = User.findOne({userId: profile.id})
-        User.findOne({ userId: profile.id }).then(async (existingUser) => {
+        User.findOne({ userId: profile.id }).then((existingUser) => {
             if (existingUser) {
                 console.log("user exists")
             done(null, existingUser);
@@ -36,16 +36,13 @@ passport.use(
             userId: profile.emails[0].value,
             googleId: profile.id,
             status: "Active",
-            confirmationCode: "code"+profile.id
+            confirmationCode: "code" + profile.id
         });
 
-        const result = await userToSave.save();
-       
-        await done(null, result)
-                // .save()
-                // .then((user) => {
-                //     done(null, user);
-                // });
+        userToSave.save(userToSave)
+                .then((user) => {
+                    done(null, userToSave);
+                });
             }
         });
     }
