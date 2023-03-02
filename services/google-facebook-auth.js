@@ -35,6 +35,7 @@ passport.use(
                 new User({
                     userId: profile.id,
                     status: "Active",
+                    confirmationCode: null
                 })
                 .save()
                 .then((user) => {
