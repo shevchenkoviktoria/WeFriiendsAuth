@@ -25,7 +25,7 @@ passport.use(
      
       // check if user id already exists
      // const user = User.findOne({userId: profile.id})
-        User.findOne({ userId: profile.id }).then((existingUser) => {
+        User.findOne({$or: [{'userId': profile.emails[0].value}, {'googleId': profile.id}] }).then((existingUser) => {
             if (existingUser) {
                 console.log("user exists")
             done(null, existingUser);

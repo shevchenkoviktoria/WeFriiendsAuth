@@ -55,9 +55,7 @@ module.exports = (app) => {
     });
 
     app.get("/api/auth/login/success", (req,res) => {
-        console.log("in login success route")
         if (req.user) {
-            console.log("in req.user")
             let payload = {
                 _id: req.user._id,
                 userId: req.user.userId,
@@ -70,11 +68,9 @@ module.exports = (app) => {
                 token: token
             })
         } else {
-            console.log("there an error in login")
+            console.log("there is an error in login")
         }
     });
-
-
     
     app.get("/api/auth/google/callback", passport.authenticate('google', {
         successRedirect: "/api/auth/login/success",
