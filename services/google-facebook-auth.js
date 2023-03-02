@@ -39,7 +39,7 @@ passport.use(
         });
 
         const result = await userToSave.save();
-        await result.validate();
+       
         await done(null, result)
                 // .save()
                 // .then((user) => {

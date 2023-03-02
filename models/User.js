@@ -5,6 +5,7 @@ const userSchema = new Schema({
   userId: {
     type: String,
     unique: true,
+    required: true
   },
   password: String,
   status: {
@@ -15,7 +16,8 @@ const userSchema = new Schema({
   confirmationCode: {
     type: String,
     unique: true,
-  },
+    index: { unique: true, sparse: true }
+  }
 });
 
 mongoose.model("users", userSchema);
