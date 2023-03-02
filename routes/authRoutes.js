@@ -55,7 +55,7 @@ module.exports = (app) => {
     });
 
     app.get("/api/auth/login/success", (req,res) => {
-        console.log("in login success")
+        console.log("in login success ", req.user)
         if (req.user) {
             let payload = {
                 _id: req.user._id,
