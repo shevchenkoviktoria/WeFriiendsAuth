@@ -39,9 +39,9 @@ passport.use(
             confirmationCode: "code" + profile.id
         });
 
-        userToSave.save(userToSave)
+        userToSave.save()
                 .then((user) => {
-                    done(null, userToSave);
+                    done(null, user);
                 });
             }
         });
