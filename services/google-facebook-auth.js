@@ -23,12 +23,12 @@ passport.use(
         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",
         passReqToCallback: true
     },
-     (req, accessToken, refreshToken, profile, done) => {
+     async (req, accessToken, refreshToken, profile, done) => {
      
       // check if user id already exists
-      console.log("profile ", profile)
+     // console.log("profile ", profile)
    
-        User.findOne({$or: [{'userId': profile.emails[0].value}, {'googleId': profile.id}] }).then((existingUser) => {
+        User.findOne({$or: [{'userId': profile.emails[0].value}, {'googleId': profile.id}] }).then(async (existingUser) => {
             if (existingUser) {
                 console.log("user exists")
                 req._user = existingUser;
@@ -43,11 +43,13 @@ passport.use(
             confirmationCode: "code" + profile.id
         });
 
-        userToSave.save()
-                .then((user) => {
-                    req._user = user;
-                   return done(null, user);
-                });
+        const user = await userToSave.save();
+        req._user = user;
+        return done (null, user)
+                // .then((user) => {
+                //     req._user = user;
+                //    return done(null, user);
+                // });
             }
         });
     }
