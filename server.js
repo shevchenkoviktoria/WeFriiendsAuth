@@ -7,17 +7,17 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
 const cookieSession = require("cookie-session");
-// app.use(cookieSession({
-//     name: "session",
-//     keys:['lama']
-// }))
-const session = require('express-session')
-app.use(session({
-    secret: 'secret',
-    saveUninitialized: false,
-    cookie: { maxAge: oneDay },
-    resave: false 
-}));
+app.use(cookieSession({
+    name: "session",
+    keys:['lama']
+}))
+// const session = require('express-session')
+// app.use(session({
+//     secret: 'secret',
+//     saveUninitialized: false,
+//     cookie: { maxAge: oneDay },
+//     resave: false 
+// }));
 
 require("./models/User");
 require("./services/google-facebook-auth");

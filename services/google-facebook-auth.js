@@ -30,7 +30,7 @@ passport.use(
         User.findOne({$or: [{'userId': profile.emails[0].value}, {'googleId': profile.id}] }).then((existingUser) => {
             if (existingUser) {
                 console.log("user exists")
-            done(null, existingUser);
+           return done(null, existingUser);
             } else {
                 console.log("about to add a new user with id", profile)
           // adding new user
