@@ -21,7 +21,9 @@ require("./services/email-auth");
 const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+    {"origin": "http://localhost:3000"}
+));
 app.use(express.static('public'))
 
 app.use(passport.initialize());
