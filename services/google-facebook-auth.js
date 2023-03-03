@@ -20,9 +20,9 @@ passport.use(
         clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
         clientSecret: process.env.GOOGLE_AUTH_SECRET,
         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",
-      //  passReqToCallback: true
+        passReqToCallback: true
     },
-     (accessToken, refreshToken, profile, done) => {
+     (req, accessToken, refreshToken, profile, done) => {
      
       // check if user id already exists
       console.log("profile ", profile)
@@ -43,6 +43,7 @@ passport.use(
 
         userToSave.save()
                 .then((user) => {
+                    req._user = user;
                    return done(null, user);
                 });
             }
