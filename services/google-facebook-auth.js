@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user);
+    //done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
