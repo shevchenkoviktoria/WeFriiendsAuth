@@ -6,6 +6,11 @@ dotenv.config();
 const passport = require("passport");
 const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
+const cookieSession = require("cookie-session");
+app.use(cookieSession({
+    name: "session",
+    keys:['lama']
+}))
 const session = require('express-session')
 app.use(session({
     secret: 'secret',
@@ -22,7 +27,7 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cors(
-    {"origin": "http://localhost:3000"}
+   // {"origin": "http://localhost:3000"}
 ));
 app.use(express.static('public'))
 
