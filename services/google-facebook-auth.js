@@ -25,6 +25,7 @@ passport.use(
      (accessToken, refreshToken, profile, done) => {
      
       // check if user id already exists
+      console.log("profile ", profile)
    
         User.findOne({$or: [{'userId': profile.emails[0].value}, {'googleId': profile.id}] }).then((existingUser) => {
             if (existingUser) {
