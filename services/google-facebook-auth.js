@@ -15,32 +15,60 @@ passport.deserializeUser((id, done) => {
 });
 
 // Google Auth
+// passport.use(
+//     new GoogleStrategy({
+//         clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
+//         clientSecret: process.env.GOOGLE_AUTH_SECRET,
+//         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",
+//       //  passReqToCallback: true
+//     },
+//      (accessToken, refreshToken, profile, done) => {
+     
+//       // check if user id already exists
+   
+//         User.findOne({$or: [{'userId': profile.emails[0].value}, {'googleId': profile.id}] }).then((existingUser) => {
+//             if (existingUser) {
+//                 console.log("user exists")
+//             done(null, existingUser);
+//             } else {
+//                 console.log("about to add a new user with id", profile)
+//           // adding new user
+//           const userToSave = new User({
+//             userId: profile.emails[0].value,
+//             googleId: profile.id,
+//             status: "Active",
+//             confirmationCode: "code" + profile.id
+//         });
+
+//         userToSave.save()
+//                 .then((user) => {
+//                     done(null, user);
+//                 });
+//             }
+//         });
+//     }
+//   )
+// );
+
 passport.use(
     new GoogleStrategy({
         clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
         clientSecret: process.env.GOOGLE_AUTH_SECRET,
-        callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",
-      //  passReqToCallback: true
+        callbackURL: "/api/auth/google/callback"
     },
-     (accessToken, refreshToken, profile, done) => {
+    (accessToken, refreshToken, profile, done) => {
      
       // check if user id already exists
-     // const user = User.findOne({userId: profile.id})
-        User.findOne({$or: [{'userId': profile.emails[0].value}, {'googleId': profile.id}] }).then((existingUser) => {
+        User.findOne({ googleId: profile.id }).then((existingUser) => {
             if (existingUser) {
-                console.log("user exists")
             done(null, existingUser);
             } else {
-                console.log("about to add a new user with id", profile)
           // adding new user
-          const userToSave = new User({
-            userId: profile.emails[0].value,
-            googleId: profile.id,
-            status: "Active",
-            confirmationCode: "code" + profile.id
-        });
-
-        userToSave.save()
+                new User({
+                    userId: profile.id,
+                    status: "Active",
+                })
+                .save()
                 .then((user) => {
                     done(null, user);
                 });
@@ -48,7 +76,7 @@ passport.use(
         });
     }
   )
-);
+)
 
 // Facebook Auth
 // passport.use(
