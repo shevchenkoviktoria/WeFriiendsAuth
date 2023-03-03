@@ -62,7 +62,7 @@ module.exports = (app) => {
                 userId: req.user.userId,
             };
             let token = jwt.sign(payload, 'secret');
-            res.send({
+            res.status(200).json({
                 success: true, 
                 message: 'sucess',
                 user: req.user,
