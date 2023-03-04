@@ -83,7 +83,7 @@ module.exports = (app) => {
     app.get("/api/auth/google/callback", passport.authenticate(
         'google', 
         {
-        successRedirect: 'http://localhost:3000', 
+        successRedirect: 'http://localhost:3000/', 
         failureRedirect: "/api/auth/login/failed",
         
     }),

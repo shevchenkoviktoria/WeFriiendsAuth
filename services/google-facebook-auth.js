@@ -11,7 +11,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((user, done) => {
    // done(null, user);
-    User.findById(id).then((user) => {
+    User.findById(user.id).then((user) => {
         console.log("deserialize ", user)
         done(null, user);
     });
@@ -26,7 +26,7 @@ passport.use(
        // passReqToCallback: true
     },
      async (accessToken, refreshToken, profile, done) => {
-        console.log("profile ", profile)
+      
         const userFound = await User.findOne({
             $or: [{
                     'userId': profile.emails[0].value
