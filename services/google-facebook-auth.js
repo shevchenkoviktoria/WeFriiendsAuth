@@ -45,6 +45,7 @@ passport.use(
 
         const user = await userToSave.save();
         req._user = user;
+        console.log("req._user ", req._user);
         return done (null, user)
                 // .then((user) => {
                 //     req._user = user;
