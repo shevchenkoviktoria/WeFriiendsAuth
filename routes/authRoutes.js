@@ -84,8 +84,8 @@ module.exports = (app) => {
         successRedirect: 'http://localhost:3000', // "/api/auth/login/success",
         failureRedirect: "/api/auth/login/failed",
         
-    }, (req,res, err, user) => {
-        console.log("user in callback ", req.user);
+    }, (err, user) => {
+        console.log("user in callback ", user);
     }));
 
   // ==================  Facebook auth routes ======================== //
