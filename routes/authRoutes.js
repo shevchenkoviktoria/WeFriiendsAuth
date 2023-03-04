@@ -62,7 +62,7 @@ module.exports = (app) => {
     // }
 
     app.get("/api/auth/login/success", (req,res) => {
-        console.log("in login success ", req._user, req.user)
+        console.log("in login success ", req.user)
         if (req.user) {
             let payload = {
                 _id: req.user._id,
@@ -81,7 +81,7 @@ module.exports = (app) => {
     });
     
     app.get("/api/auth/google/callback", passport.authenticate('google', {
-        successRedirect: 'http://localhost:3000', // "/api/auth/login/success",
+        successRedirect: 'http://localhost:3000', 
         failureRedirect: "/api/auth/login/failed",
         
     }));

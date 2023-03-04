@@ -5,16 +5,16 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
-    done(null, user);
-    //done(null, user.id);
+ console.log("serialize ", user)
+    done(null, user.id);
 });
 
 passport.deserializeUser((user, done) => {
-    done(null, user);
-    // User.findById(id).then((user) => {
-    //     req.user
-    //     //done(null, user);
-    // });
+   // done(null, user);
+    User.findById(id).then((user) => {
+        console.log("deserialize ", user)
+        done(null, user);
+    });
 });
 
 //Google Auth
@@ -25,7 +25,7 @@ passport.use(
         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",
         passReqToCallback: true
     },
-     (req, accessToken, refreshToken, profile, done) => {
+     (accessToken, refreshToken, profile, done) => {
      
       // check if user id already exists
     
@@ -45,7 +45,7 @@ passport.use(
         });
 
         const user = await userToSave.save();
-        req._user = user;
+       
          return done (null, user)
                 // .then((user) => {
                 //     req._user = user;
