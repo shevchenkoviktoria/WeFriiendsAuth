@@ -80,11 +80,21 @@ module.exports = (app) => {
         }
     });
     
-    app.get("/api/auth/google/callback", passport.authenticate('google', {
+    app.get("/api/auth/google/callback", passport.authenticate(
+        'google', 
+        {
         successRedirect: 'http://localhost:3000', 
         failureRedirect: "/api/auth/login/failed",
         
-    }));
+    }),
+    (req, res) => {
+        var responseHTML = '<html><head><title>Main</title></head><body></body><script>res = %value%; window.opener.postMessage(res, "*");window.close();</script></html>'
+        responseHTML = responseHTML.replace('%value%', JSON.stringify({
+            user: req.user
+        }));
+        res.status(200).send(responseHTML);
+    
+    });
 
   // ==================  Facebook auth routes ======================== //
     app.get(
