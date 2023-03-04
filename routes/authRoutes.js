@@ -55,6 +55,7 @@ module.exports = (app) => {
     });
 
     const authenticated = (req,res,next)=>{
+        console.log("in authenticated ", req._user, req.user)
         const customError = new Error('you are not logged in');
         customError.statusCode = 401;
         (!req.user) ? next(customError) : next()
@@ -78,8 +79,6 @@ module.exports = (app) => {
             res.send({message: "User not Authorized"})
         }
     });
-
-    
     
     app.get("/api/auth/google/callback", passport.authenticate('google', {
         successRedirect: 'http://localhost:3000', // "/api/auth/login/success",
