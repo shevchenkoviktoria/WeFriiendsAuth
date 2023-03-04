@@ -9,10 +9,12 @@ passport.serializeUser((user, done) => {
     //done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-    User.findById(id).then((user) => {
-        done(null, user);
-    });
+passport.deserializeUser((user, done) => {
+    done(null, user);
+    // User.findById(id).then((user) => {
+    //     req.user
+    //     //done(null, user);
+    // });
 });
 
 //Google Auth
@@ -23,7 +25,7 @@ passport.use(
         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",
         passReqToCallback: true
     },
-     async (req, accessToken, refreshToken, profile, done) => {
+     (req, accessToken, refreshToken, profile, done) => {
      
       // check if user id already exists
     
@@ -31,7 +33,6 @@ passport.use(
             if (existingUser) {
                 console.log("user exists")
                 req._user = existingUser;
-                console.log("req._user ", req._user);
            return done(null, existingUser);
             } else {
                 console.log("about to add a new user with id", profile)
@@ -45,8 +46,7 @@ passport.use(
 
         const user = await userToSave.save();
         req._user = user;
-        console.log("req._user ", req._user);
-        // return done (null, user)
+         return done (null, user)
                 // .then((user) => {
                 //     req._user = user;
                 //    return done(null, user);
