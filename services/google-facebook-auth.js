@@ -26,12 +26,12 @@ passport.use(
      async (req, accessToken, refreshToken, profile, done) => {
      
       // check if user id already exists
-     // console.log("profile ", profile)
-   
+    
         User.findOne({$or: [{'userId': profile.emails[0].value}, {'googleId': profile.id}] }).then(async (existingUser) => {
             if (existingUser) {
                 console.log("user exists")
                 req._user = existingUser;
+                console.log("req._user ", req._user);
            return done(null, existingUser);
             } else {
                 console.log("about to add a new user with id", profile)
@@ -46,7 +46,7 @@ passport.use(
         const user = await userToSave.save();
         req._user = user;
         console.log("req._user ", req._user);
-        return done (null, user)
+        // return done (null, user)
                 // .then((user) => {
                 //     req._user = user;
                 //    return done(null, user);
