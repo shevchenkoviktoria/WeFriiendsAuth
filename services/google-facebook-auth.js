@@ -26,10 +26,16 @@ passport.use(
         passReqToCallback: true
     },
      async (accessToken, refreshToken, profile, done) => {
-        const user = await User.findOne({$or: [{'userId': profile.emails[0].value}, {'googleId': profile.id}] });
-        if (user) {
+        console.log("profile ", profile)
+        const userFound = await User.findOne({
+            $or: [{
+                    'userId': profile.emails[0].value
+                  }, {
+                    'googleId': profile.id
+            }]});
+        if (userFound) {
             console.log("user exists")
-            done(null, user);
+            done(null, userFound);
         } else {
             console.log("about to add a new user with id", profile)
           // adding new user
@@ -39,12 +45,9 @@ passport.use(
             status: "Active",
             confirmationCode: "code" + profile.id
         });
-
         const user = await userToSave.save();
-       
-         return done (null, user)
-               
-            }
+        return done (null, user)
+        }
      }
     
   )
