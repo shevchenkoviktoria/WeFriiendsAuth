@@ -28,6 +28,7 @@ passport.use(
      async (accessToken, refreshToken, profile, done) => {
         const user = await User.findOne({$or: [{'userId': profile.emails[0].value}, {'googleId': profile.id}] });
         if (user) {
+            console.log("user exists")
             done(null, user);
         } else {
             console.log("about to add a new user with id", profile)
