@@ -34,6 +34,7 @@ const saveUser = async(user, token) => {
             return (`Pending registration confirmation for ${result.userId}`);
         }
     } catch(err) {
+        console.log("in error", err)
         if (err.code === 11000) {
            return ("This email address is already associated with an account");
         } 
