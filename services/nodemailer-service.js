@@ -1,4 +1,27 @@
 const nodemailer = require("nodemailer");
+const OAuth2 = google.auth.OAuth2;
+
+const createTransporter = async () => {
+    const oauth2Client = new OAuth2(
+      process.env.GMAIL_CLIENT_ID,
+      process.env.GMAIL_CLIENT_SECRET,
+      "https://developers.google.com/oauthplayground"
+    );
+  
+    oauth2Client.setCredentials({
+      refresh_token: process.env.GMAIL_REFRESH_TOKEN
+    });
+  }
+
+const accessToken = await new Promise((resolve, reject) => {
+    oauth2Client.getAccessToken((err, token) => {
+      if (err) {
+        reject("Failed to create access token :(");
+      }
+      resolve(token);
+    });
+  });
+
 const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
@@ -11,7 +34,7 @@ const transporter = nodemailer.createTransport({
         clientId: process.env.GMAIL_CLIENT_ID,
         clientSecret: process.env.GMAIL_CLIENT_SECRET,
         refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-        accessToken: process.env.GMAIL_ACCESS_TOKEN 
+        accessToken
     },
 });
 
