@@ -32,8 +32,7 @@ const saveUser = async(user, token) => {
             console.log(result);
             await nodemailer.sendConfirmationEmail(result.userId, token);
             return (`Pending registration confirmation for ${result.userId}`);
-        } 
-
+        }
     } catch(err) {
         if (err.code === 11000) {
            return ("This email address is already associated with an account");
