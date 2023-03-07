@@ -5,14 +5,11 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
- console.log("serialize ", user)
-    done(null, user.id);
+    done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-   // done(null, user);
-    User.findById(user.id).then((user) => {
-        console.log("deserialize ", user)
+    User.findById(user._id).then((user) => {
         done(null, user);
     });
 });
@@ -20,13 +17,11 @@ passport.deserializeUser((user, done) => {
 //Google Auth
 passport.use(
     new GoogleStrategy({
-        clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
+        clientID: GOOGLE_AUTH_CLIENT_ID,
         clientSecret: process.env.GOOGLE_AUTH_SECRET,
         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",
-       // passReqToCallback: true
     },
-     async (accessToken, refreshToken, profile, done) => {
-      
+    async (accessToken, refreshToken, profile, done) => {
         const userFound = await User.findOne({
             $or: [{
                     'userId': profile.emails[0].value
@@ -34,22 +29,22 @@ passport.use(
                     'googleId': profile.id
             }]});
         if (userFound) {
-            console.log("user exists")
             done(null, userFound);
         } else {
-            console.log("about to add a new user with id", profile)
-          // adding new user
-          const userToSave = new User({
-            userId: profile.emails[0].value,
-            googleId: profile.id,
-            status: "Active",
-            confirmationCode: "code" + profile.id
-        });
-        const user = await userToSave.save();
-        return done (null, user)
+            const userToSave = new User({
+                userId: profile.emails[0].value,
+                googleId: profile.id,
+                status: "Active",
+                confirmationCode: "code" + profile.id
+            });
+            try {
+                const user = await userToSave.save();
+                return done (null, user)
+            } catch(error) {
+                return "There was an error creating a user";
+            }
         }
-     }
-    
+    }
   )
 );
 

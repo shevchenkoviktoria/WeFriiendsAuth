@@ -47,22 +47,13 @@ module.exports = (app) => {
     );
     
     app.get("/api/auth/login/failed", (req,res) => {
-        console.log("in login failed")
         res.status(401).json({
             success: false, 
             message: 'Failure of login attempt'
         })
     });
 
-    // const authenticated = (req,res,next)=>{
-    //     console.log("in authenticated ", req._user, req.user)
-    //     const customError = new Error('you are not logged in');
-    //     customError.statusCode = 401;
-    //     (!req.user) ? next(customError) : next()
-    // }
-
     app.get("/api/auth/login/success", (req,res) => {
-        console.log("in login success ", req.user)
         if (req.user) {
             let payload = {
                 _id: req.user._id,
@@ -70,31 +61,32 @@ module.exports = (app) => {
             };
             let token = jwt.sign(payload, 'secret');
             res.status(200).json({
-                success: true, 
-                message: 'sucess',
-                user: req.user,
+                success: true,
                 token: token
             })
         } else {
-            res.send({message: "User not Authorized"})
+            res.status(400).jsons({
+                success: false,
+                message: "User not Authorized"
+            })
         }
     });
     
     app.get("/api/auth/google/callback", passport.authenticate(
         'google', 
-        {
-        successRedirect: 'http://localhost:3000/', 
-        failureRedirect: "/api/auth/login/failed",
-        
-    }),
-    (req, res) => {
-        var responseHTML = '<html><head><title>Main</title></head><body></body><script>res = %value%; window.opener.postMessage(res, "*");window.close();</script></html>'
-        responseHTML = responseHTML.replace('%value%', JSON.stringify({
-            user: req.user
-        }));
-        res.status(200).send(responseHTML);
+        { 
+            successRedirect: 'http://localhost:3000/', 
+            failureRedirect: "/api/auth/login/failed",
+        }),
+    // (req, res) => {
+    //     var responseHTML = '<html><head><title>Main</title></head><body></body><script>res = %value%; window.opener.postMessage(res, "*");window.close();</script></html>'
+    //     responseHTML = responseHTML.replace('%value%', JSON.stringify({
+    //         user: req.user
+    //     }));
+    //     res.status(200).send(responseHTML);
     
-    });
+    // }
+    );
 
   // ==================  Facebook auth routes ======================== //
     app.get(
