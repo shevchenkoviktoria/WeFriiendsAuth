@@ -36,7 +36,7 @@ const saveUser = async(user, token) => {
         if (err.code === 11000) {
            return ("This email address is already associated with an account");
         } 
-        return(`There was an error in sending confirmation email `, err);
+        return(`There was an error in sending confirmation email`);
     }
 }
 
