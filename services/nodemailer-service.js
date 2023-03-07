@@ -1,5 +1,11 @@
 const nodemailer = require("nodemailer");
+const { google } = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
+
+
+oauth2Client.setCredentials({
+    refresh_token: process.env.REFRESH_TOKEN
+});
 
 const createTransporter = async () => {
     const oauth2Client = new OAuth2(
@@ -11,7 +17,7 @@ const createTransporter = async () => {
     oauth2Client.setCredentials({
       refresh_token: process.env.GMAIL_REFRESH_TOKEN
     });
-  }
+  
 
 const accessToken = new Promise((resolve, reject) => {
     oauth2Client.getAccessToken((err, token) => {
@@ -36,11 +42,16 @@ const transporter = nodemailer.createTransport({
         refreshToken: process.env.GMAIL_REFRESH_TOKEN,
         accessToken
     },
-});
+})
+return transporter;
+}
+
+
 
 module.exports.sendConfirmationEmail = async(email, confirmationCode) => {
+    let emailTransporter = await createTransporter();
     console.log("in nodemailer ", email)
-    const info = await transporter
+    const info = await emailTransporter
         .sendMail({
             from: process.env.GMAIL_USER,    
             to: email,
