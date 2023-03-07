@@ -45,7 +45,6 @@ return transporter;
 
 module.exports.sendConfirmationEmail = async(email, confirmationCode) => {
     let emailTransporter = await createTransporter();
-    console.log("in nodemailer ", email)
     const info = await emailTransporter
         .sendMail({
             from: process.env.GMAIL_USER,    
