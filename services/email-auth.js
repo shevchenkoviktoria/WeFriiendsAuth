@@ -29,8 +29,7 @@ const saveUser = async(user, token) => {
     try {
         const result = await user.save();
         if (result) {
-            const nodemailerResult = await nodemailer.sendConfirmationEmail(result.userId, token);
-            console.log("result ", nodemailerResult)
+            await nodemailer.sendConfirmationEmail(result.userId, token);
             return (`Pending registration confirmation for ${result.userId}`);
         }
     } catch(err) {
