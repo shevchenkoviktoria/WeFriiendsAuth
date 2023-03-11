@@ -18,7 +18,7 @@ passport.deserializeUser((user, done) => {
 passport.use(
     new GoogleStrategy({
         clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
-        clientSecret: GOOGLE_AUTH_SECRET,
+        clientSecret: process.env.GOOGLE_AUTH_SECRET,
         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
