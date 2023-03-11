@@ -15,38 +15,35 @@ passport.deserializeUser((user, done) => {
 });
 
 //Google Auth
-// passport.use(
-//     new GoogleStrategy({
-//         clientID: "681911775744-38tdbjb6qsrejqre35ce5ems8sg7hnje.apps.googleusercontent.com",
-//         clientSecret: "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",
-//         callbackURL: "http://localhost:8080/api/auth/google/callback"
-//         // "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",
-//     },
-//     async (accessToken, refreshToken, profile, done) => {
-        
-//         const userFound = await User.findOne({
-//             $or: [{
-//                     'userId': profile.emails[0].value
-//                   }, {
-//                     'googleId': profile.id
-//             }]});
-//         if (userFound) {
-//             console.log("existing user")
-//             done(null, userFound);
-//         } else {
-//             console.log("new user")
-//             const userToSave = new User({
-//                 userId: profile.emails[0].value,
-//                 googleId: profile.id,
-//                 status: "Active",
-//                 confirmationCode: "code" + profile.id
-//             });
-//             const user = await userToSave.save();
-//             return done (null, user)
-//         }
-//     }
-//   )
-// );
+passport.use(
+    new GoogleStrategy({
+        clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
+        clientSecret: GOOGLE_AUTH_SECRET,
+        callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",
+    },
+    async (accessToken, refreshToken, profile, done) => {
+        const userFound = await User.findOne({
+            $or: [{
+                    'userId': profile.emails[0].value
+                  }, {
+                    'googleId': profile.id
+            }]});
+        if (userFound) {
+            console.log("existing user")
+            done(null, userFound);
+        } else {
+            const userToSave = new User({
+                userId: profile.emails[0].value,
+                googleId: profile.id,
+                status: "Active",
+                confirmationCode: "code" + profile.id
+            });
+            const user = await userToSave.save();
+            return done (null, user)
+        }
+    }
+  )
+);
 
 // //Facebook Auth
 // passport.use(
