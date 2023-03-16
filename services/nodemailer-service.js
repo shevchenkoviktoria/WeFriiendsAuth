@@ -44,7 +44,7 @@ const transporter = nodemailer.createTransport({
         clientId: process.env.GMAIL_CLIENT_ID,
         clientSecret: process.env.GMAIL_CLIENT_SECRET,
         refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-        accessToken
+        accessToken: "ya29.a0AVvZVsrN2rT3hhbfxSOj8ana5kEyWyCbGjNdr9k6d5R187_lvNl2QFHFm0QVJWS8zX4TOIa96c-1ISALVI7P5_ldMfU9pXSEHVStqzGdX6DaISUoQ4h3hExByV65u0J8al9C4tNcwY4QOh9IBd2CsXtCpRNKaCgYKAV0SARISFQGbdwaI-pLjPSGHXWfXKhhuTvQRXg0163"
     },
 })
 return transporter;
