@@ -23,14 +23,14 @@ const createTransporter = async () => {
 //     console.log(err)
 //     }    
 // }
-const accessToken = new Promise((resolve, reject) => {
-    oauth2Client.getAccessToken((err, token) => {
-      if (err) {
-        reject("Failed to create access token "+err);
-      }
-      resolve(token);
-    });
-  });
+// const accessToken = new Promise((resolve, reject) => {
+//     oauth2Client.getAccessToken((err, token) => {
+//       if (err) {
+//         reject("Failed to create access token "+err);
+//       }
+//       resolve(token);
+//     });
+//   });
 
 const transporter = nodemailer.createTransport({
     service: "Gmail",
