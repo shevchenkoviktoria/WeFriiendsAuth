@@ -17,7 +17,7 @@ const accessToken = async() => {
     try {
         const response = await oauth2Client.getAccessToken();
         console.log("token received ", response.config.data);
-        return token
+        return response.config.data
     }catch(err){
     console.log(err)
     }
