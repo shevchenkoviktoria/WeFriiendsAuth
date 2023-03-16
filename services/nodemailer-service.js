@@ -13,25 +13,24 @@ const createTransporter = async () => {
       refresh_token: process.env.GMAIL_REFRESH_TOKEN
     });
   
-const accessToken = async() => {
-    try {
-        console.log("in accessToken")
-        const response = await oauth2Client.getAccessToken();
-       // console.log("token received ", response.config.data);
-        return response.config.data
-    }catch(err){
-    console.log(err)
-    }
-    
-}
-// const accessToken = new Promise((resolve, reject) => {
-//     oauth2Client.getAccessToken((err, token) => {
-//       if (err) {
-//         reject("Failed to create access token "+err);
-//       }
-//       resolve(token);
-//     });
-//   });
+// const accessToken = async() => {
+//     try {
+//         console.log("in accessToken")
+//         const response = await oauth2Client.getAccessToken();
+//        // console.log("token received ", response.config.data);
+//         return response.config.data
+//     }catch(err){
+//     console.log(err)
+//     }    
+// }
+const accessToken = new Promise((resolve, reject) => {
+    oauth2Client.getAccessToken((err, token) => {
+      if (err) {
+        reject("Failed to create access token "+err);
+      }
+      resolve(token);
+    });
+  });
 
 const transporter = nodemailer.createTransport({
     service: "Gmail",
