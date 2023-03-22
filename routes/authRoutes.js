@@ -75,7 +75,7 @@ module.exports = (app) => {
     app.get("/api/auth/google/callback", passport.authenticate(
         'google', 
         { 
-            successRedirect: 'http://localhost:3000/', 
+            successRedirect: 'http://localhost:3000/registration/glad-screen', 
             failureRedirect: "/api/auth/login/failed",
         }),
     // (req, res) => {
