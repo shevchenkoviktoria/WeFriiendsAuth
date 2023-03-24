@@ -79,16 +79,8 @@ module.exports = (app) => {
         { 
             successRedirect: 'http://localhost:3000',       //'http://localhost:3000/registration/glad-screen', 
             failureRedirect: "/api/auth/login/failed",
-          session: 'true'
-        }),
-    // (req, res) => {
-    //     var responseHTML = '<html><head><title>Main</title></head><body></body><script>res = %value%; window.opener.postMessage(res, "*");window.close();</script></html>'
-    //     responseHTML = responseHTML.replace('%value%', JSON.stringify({
-    //         user: req.user
-    //     }));
-    //     res.status(200).send(responseHTML);
-    
-    // }
+         
+        }),    
     );
 
   // ==================  Facebook auth routes ======================== //
