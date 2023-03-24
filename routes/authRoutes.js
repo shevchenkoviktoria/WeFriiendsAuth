@@ -32,6 +32,7 @@ module.exports = (app) => {
     });
 
     app.get("/api/auth/confirm/:confirmationCode", (req, res) => {
+        console.log("user is ", req.user)
             userService
                 .verifyUserEmail(req.params.confirmationCode)
                 .then((msg) => res.json({ message: msg }))
@@ -54,6 +55,7 @@ module.exports = (app) => {
     });
 
     app.get("/api/auth/login/success", (req,res) => {
+        console.log("user ", req.user)
         if (req.user) {
             let payload = {
                 _id: req.user._id,
@@ -62,10 +64,11 @@ module.exports = (app) => {
             let token = jwt.sign(payload, 'secret');
             res.status(200).json({
                 success: true,
+                user: req.user,
                 token: token
             })
         } else {
-            res.status(400).jsons({
+            res.json({
                 success: false,
                 message: "User not Authorized"
             })
@@ -78,14 +81,6 @@ module.exports = (app) => {
             successRedirect: 'http://localhost:3000/', 
             failureRedirect: "/api/auth/login/failed",
         }),
-    // (req, res) => {
-    //     var responseHTML = '<html><head><title>Main</title></head><body></body><script>res = %value%; window.opener.postMessage(res, "*");window.close();</script></html>'
-    //     responseHTML = responseHTML.replace('%value%', JSON.stringify({
-    //         user: req.user
-    //     }));
-    //     res.status(200).send(responseHTML);
-    
-    // }
     );
 
   // ==================  Facebook auth routes ======================== //
