@@ -32,7 +32,7 @@ passport.use(
             }]});
         if (userFound) {
             console.log("existing user")
-            done(null, userFound);
+            return done(null, userFound);
         } else {
             const userToSave = new User({
                 userId: profile.emails[0].value,

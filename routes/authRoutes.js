@@ -68,7 +68,7 @@ module.exports = (app) => {
                 token: token
             })
         } else {
-            res.json({
+            res.status(400).json({
                 success: false,
                 message: "User not Authorized"
             })
@@ -78,7 +78,7 @@ module.exports = (app) => {
     app.get("/api/auth/google/callback", passport.authenticate(
         'google', 
         { 
-            successRedirect: 'http://localhost:3000/', 
+            successRedirect: 'http://localhost:3000/registration/glad-screen', 
             failureRedirect: "/api/auth/login/failed",
         }),
     );
