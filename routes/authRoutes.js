@@ -79,6 +79,7 @@ module.exports = (app) => {
         { 
             successRedirect: 'http://localhost:3000/registration/glad-screen', 
             failureRedirect: "/api/auth/login/failed",
+          session: true
          
         }),    
     );
