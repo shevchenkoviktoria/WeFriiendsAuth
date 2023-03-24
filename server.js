@@ -15,18 +15,20 @@ const session = require('express-session')
 app.use(session({
     secret: 'secret',
     saveUninitialized: true,
-  //  cookie: { maxAge: oneDay },
+    cookie: { maxAge: oneDay },
     resave: false 
 }));
 
 const HTTP_PORT = process.env.PORT || 8080;
 
 app.use(express.json());
-app.use(cors(
-    {origin: "http://localhost:3000",
-    credentials: true
-}
-));
+app.use(
+    cors(
+//     {origin: "http://localhost:3000",
+//     credentials: true
+// }
+)
+);
 app.use(express.static('public'))
 
 app.use(passport.initialize());
