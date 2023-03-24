@@ -66,7 +66,7 @@ module.exports = (app) => {
                 token: token
             })
         } else {
-            res.status(400).jsons({
+            res.status(400).json({
                 success: false,
                 message: "User not Authorized"
             })
