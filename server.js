@@ -16,6 +16,7 @@ app.use(session({
     secret: "secret",
     resave: false ,
     saveUninitialized: true ,
+    cookie: { maxAge: 60 * 60 * 1000 }
 }));
 
 const HTTP_PORT = process.env.PORT || 8080;
