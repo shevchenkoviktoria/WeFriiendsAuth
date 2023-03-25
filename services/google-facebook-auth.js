@@ -6,23 +6,18 @@ const User = mongoose.model("users");
 
 passport.serializeUser((user, done) => {
     console.log("serializeUser called ", user)
-    done(null, user.id);
-  //  done(null, user);
+   // done(null, user.id);
+      done(null, user);
 });
 
-// passport.deserializeUser((user, done) => {
-//     console.log("deserializeUser called ", user)
-//     User.findById(user._id).then((user) => {
-//         done(null, user);
-//     });
-// });
-
-passport.deserializeUser((id, done) => {
-    console.log("deserialize ", id)
-    User.findById(id).then((user) => {
+passport.deserializeUser((user, done) => {
+    console.log("deserializeUser called ", user)
+    User.findById(user._id).then((user) => {
         done(null, user);
     });
 });
+
+
 
 //Google Auth
 passport.use(
