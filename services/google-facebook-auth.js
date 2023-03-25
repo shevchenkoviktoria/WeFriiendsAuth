@@ -47,7 +47,6 @@ passport.use(
                 confirmationCode: "code" + profile.id
             });
             const user = await userToSave.save();
-            console.log("user ", user)
             done (null, user)
         }
     }
