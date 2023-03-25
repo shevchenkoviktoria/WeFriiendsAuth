@@ -13,10 +13,9 @@ const oneDay = 1000 * 60 * 60 * 24;
 // }))
 const session = require('express-session')
 app.use(session({
-    secret: 'secret',
-    saveUninitialized: true,
-    cookie: { maxAge: oneDay },
-    resave: false 
+    secret: "secret",
+    resave: false ,
+    saveUninitialized: true ,
 }));
 
 const HTTP_PORT = process.env.PORT || 8080;
