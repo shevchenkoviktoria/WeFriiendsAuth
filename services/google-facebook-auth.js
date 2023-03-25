@@ -36,6 +36,7 @@ passport.use(
             console.log("existing user")
             return done(null, userFound);
         } else {
+            console.log("about to add a new user ")
             const userToSave = new User({
                 userId: profile.emails[0].value,
                 googleId: profile.id,
@@ -43,7 +44,8 @@ passport.use(
                 confirmationCode: "code" + profile.id
             });
             const user = await userToSave.save();
-            return done (null, user)
+            console.log("user ", user)
+            done (null, user)
         }
     }
   )
