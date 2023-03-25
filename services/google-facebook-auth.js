@@ -25,6 +25,7 @@ passport.use(
       //  passReqToCallback: true
     },
     async (accessToken, refreshToken, profile, done) => {
+        console.log("inside strategy")
         const userFound = await User.findOne({
             $or: [{
                     'userId': profile.emails[0].value
