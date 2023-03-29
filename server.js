@@ -39,7 +39,7 @@ require("./services/email-auth");
 require("./routes/authRoutes")(app);
 
 mongoose.connect(
-    'mongodb+srv://wefriiends-backup:wefriiends2023@cluster0.wir50id.mongodb.net/authorization?retryWrites=true&w=majority',
+    process.ENV.MONGODB_URL,
     { 
         useNewUrlParser: true, 
         useUnifiedTopology: true 
