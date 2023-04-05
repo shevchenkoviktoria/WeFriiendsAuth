@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
    // done(null, user.id);
     
       done(null, user);
-     console.log("serializeUser called ", req.session.passport.user.{user})
+     console.log("serializeUser called ", req.session.passport.user)
 });
 
 passport.deserializeUser((id, done) => {
