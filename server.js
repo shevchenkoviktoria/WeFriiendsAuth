@@ -39,7 +39,7 @@ require("./services/email-auth");
 require("./routes/authRoutes")(app);
 
 mongoose.connect(
-    process.ENV.MONGODB_URL,
+    process.env.MONGODB_URL,
     { 
         useNewUrlParser: true, 
         useUnifiedTopology: true 
