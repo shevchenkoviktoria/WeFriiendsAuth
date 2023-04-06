@@ -6,26 +6,27 @@ dotenv.config();
 const passport = require("passport");
 const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
-// const expressSession = require('express-session')
-// const session = {
-//     secret: "secret",
-//     resave: false ,
-//     saveUninitialized: false ,
-//     cookie: { maxAge: 60*60*1000}
-// }
+const expressSession = require('express-session')
+const session = {
+    secret: "secret",
+    resave: false ,
+    saveUninitialized: false ,
+    cookie: { maxAge: 60*60*1000, sameSite: 'none',
+    secure: true}
+}
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.static('public'));
 
 //app.use(require('cookie-parser')());
 //app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+//app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 // if (app.get("env") === "production") {
 //   // Serve secure cookies, requires HTTPS
 //   session.cookie.secure = true; 
 // }
-
+app.enable('trust proxy');
 
 const HTTP_PORT = process.env.PORT || 8080;
 
