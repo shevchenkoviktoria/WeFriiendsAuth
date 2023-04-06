@@ -13,6 +13,10 @@ const session = {
     saveUninitialized: false ,
     cookie: { maxAge: 60*60*1000}
 }
+// app.use(require('serve-static')(__dirname + '/../../public'));
+// app.use(require('cookie-parser')());
+// app.use(require('body-parser').urlencoded({ extended: true }));
+// app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
 if (app.get("env") === "production") {
   // Serve secure cookies, requires HTTPS
