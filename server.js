@@ -11,7 +11,7 @@ const session = {
     secret: "secret",
     resave: false ,
     saveUninitialized: false ,
-    cookie: { maxAge: 60 * 60 * 1000 }
+    cookie: { maxAge: 360*5, httpOnly:false}
 }
 
 if (app.get("env") === "production") {
