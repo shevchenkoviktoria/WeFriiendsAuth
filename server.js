@@ -40,7 +40,7 @@ app.use(
 );
 //app.use(express.static('public'))
 
-//app.use(expressSession(session));
+app.use(expressSession(session));
 
 app.use(passport.initialize());
 app.use(passport.session());
