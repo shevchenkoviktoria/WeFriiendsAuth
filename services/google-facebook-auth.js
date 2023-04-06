@@ -42,11 +42,10 @@ passport.serializeUser((user, done) => {
      
 });
 
-passport.deserializeUser((id, done) => {
-     console.log("deserializeUser called")
-    User.findById(id).then((user) => {
-        done(null, user);
-    });
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
 });
 
 // //Facebook Auth
