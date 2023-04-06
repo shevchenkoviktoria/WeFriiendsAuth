@@ -10,7 +10,7 @@ const expressSession = require('express-session')
 const session = {
     secret: "secret",
     resave: false ,
-    saveUninitialized: false ,
+    saveUninitialized: true ,
     cookie: { maxAge: 360*5, httpOnly:false}
 }
 
