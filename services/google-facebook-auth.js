@@ -4,21 +4,6 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
-passport.serializeUser((user, done) => {
-   console.log("serializeUser called ", user._id)
-      done(null, user._id);
-     
-});
-
-passport.deserializeUser((id, done) => {
-     console.log("deserializeUser called")
-    User.findById(id).then((user) => {
-        done(null, user);
-    });
-});
-
-
-
 //Google Auth
 passport.use(
     new GoogleStrategy({
@@ -52,6 +37,19 @@ passport.use(
     }
   )
 );
+
+passport.serializeUser((user, done) => {
+   console.log("serializeUser called ", user.userId)
+      done(null, user);
+     
+});
+
+passport.deserializeUser((id, done) => {
+     console.log("deserializeUser called")
+    User.findById(id).then((user) => {
+        done(null, user);
+    });
+});
 
 // //Facebook Auth
 // passport.use(
