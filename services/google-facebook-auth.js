@@ -37,7 +37,7 @@ passport.use(
             }]});
         if (userFound) {
             console.log("existing user")
-            return done(null, userFound);
+            done(null, userFound);
         } else {
             console.log("about to add a new user ")
             const userToSave = new User({
