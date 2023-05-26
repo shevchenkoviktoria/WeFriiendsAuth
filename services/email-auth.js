@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("./nodemailer-service.js");
-
+const { v4: uuidv4 } = require('uuid');
 let User = mongoose.model("users");
 
 module.exports.registerUser = async(userData, req,res) => {
