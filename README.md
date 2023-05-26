@@ -1,4 +1,4 @@
-# User Auth Service
+# User Auth Service  WIP repo (cloned)
 
 This service has a function of adding new users to the users pool by having them follow one of 3 options:
 * Email
