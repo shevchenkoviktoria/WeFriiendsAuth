@@ -53,6 +53,7 @@ return transporter;
 
 
 module.exports.sendConfirmationEmail = async(email, confirmationCode) => {
+    console.log(' get email ', email)
     let emailTransporter = await createTransporter();
     const info = await emailTransporter
         .sendMail({
