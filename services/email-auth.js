@@ -5,11 +5,12 @@ const nodemailer = require("./nodemailer-service.js");
 let User = mongoose.model("users");
 
 module.exports.registerUser = async(userData, req,res) => {
+    console.log("in register user")
     if (userData.password !== userData.password2) {
         res.send('Passwords do not match');
     }
-    const hash = await bcrypt.hash(userData.password, 10);
-    userData.password = hash;
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+  //  userData.password = hash;
 //     const token = jwt.sign(
 //         { userId: userData.email },
 //         process.env.JWT_SECRET
@@ -20,12 +21,14 @@ module.exports.registerUser = async(userData, req,res) => {
     password: hashedPassword,
     confirmationCode
   });
+    console.log("user ", userToSave)
    
-    const response = await saveUser(userToSave, token);
+    const response = await saveUser(userToSave, confirmationCode);
     return response;
 }
 
 const saveUser = async(user, token) => {
+    console.log('in save')
     try {
         const result = await user.save();
         if (result) {
