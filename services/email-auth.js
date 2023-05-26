@@ -22,6 +22,7 @@ module.exports.registerUser = async(userData, req,res) => {
     password: hashedPassword,
     confirmationCode: token
   });
+    console.log("user ", userToSave)
    
     const response = await saveUser(userToSave, token);
     return response;
