@@ -23,7 +23,7 @@ module.exports.registerUser = async(userData, req,res) => {
     confirmationCode: token
   });
    
-    const response = await saveUser(userToSave, confirmationCode);
+    const response = await saveUser(userToSave, token);
     return response;
 }
 
