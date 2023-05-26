@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("./nodemailer-service.js");
 let User = mongoose.model("users");
+const { v4: uuidv4 } = require('uuid');
 
 module.exports.registerUser = async(userData, req,res) => {
     console.log("in register user")
@@ -16,6 +17,7 @@ module.exports.registerUser = async(userData, req,res) => {
 //         process.env.JWT_SECRET
 //     );
     const confirmationCode = uuidv4();
+    console.log("code is ", confirmationCode)
      const userToSave = new User({
     userId: userData.email,
     password: hashedPassword,
