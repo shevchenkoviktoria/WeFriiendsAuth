@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 let User = mongoose.model("users");
 
 module.exports.registerUser = async(userData, req,res) => {
+    console.log("in register user")
     if (userData.password !== userData.password2) {
         res.send('Passwords do not match');
     }
