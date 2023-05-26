@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("./nodemailer-service.js");
-const { v4: uuidv4 } = require('uuid');
+//const { v4: uuidv4 } = require('uuid');
 let User = mongoose.model("users");
 
 module.exports.registerUser = async(userData, req,res) => {
@@ -12,15 +12,15 @@ module.exports.registerUser = async(userData, req,res) => {
     }
     const hash = await bcrypt.hash(userData.password, 10);
     userData.password = hash;
-//     const token = jwt.sign(
-//         { userId: userData.email },
-//         process.env.JWT_SECRET
-//     );
-    const confirmationCode = uuidv4();
+    const token = jwt.sign(
+        { userId: userData.email },
+        process.env.JWT_SECRET
+    );
+   // const confirmationCode = uuidv4();
      const userToSave = new User({
     userId: userData.email,
     password: hashedPassword,
-    confirmationCode
+    confirmationCode: token
   });
    
     const response = await saveUser(userToSave, confirmationCode);
