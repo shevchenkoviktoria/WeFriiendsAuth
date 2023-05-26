@@ -11,15 +11,16 @@ module.exports.registerUser = async(userData, req,res) => {
     }
     const hash = await bcrypt.hash(userData.password, 10);
     userData.password = hash;
-    const token = jwt.sign(
-        { userId: userData.email },
-        process.env.JWT_SECRET
-    );
-    let userToSave = new User({
-        userId: userData.email,
-        password:  userData.password,
-        confirmationCode: token,
-    });
+//     const token = jwt.sign(
+//         { userId: userData.email },
+//         process.env.JWT_SECRET
+//     );
+    const confirmationCode = uuidv4();
+     const userToSave = new User({
+    userId: userData.email,
+    password: hashedPassword,
+    confirmationCode
+  });
    
     const response = await saveUser(userToSave, token);
     return response;
