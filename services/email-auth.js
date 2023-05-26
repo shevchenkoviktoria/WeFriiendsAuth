@@ -11,7 +11,7 @@ module.exports.registerUser = async(userData, req,res) => {
         res.send('Passwords do not match');
     }
     const hashedPassword = await bcrypt.hash(userData.password, 10);
-    userData.password = hash;
+  //  userData.password = hash;
     const token = jwt.sign(
         { userId: userData.email },
         process.env.JWT_SECRET
