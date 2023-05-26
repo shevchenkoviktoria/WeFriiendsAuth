@@ -28,6 +28,7 @@ module.exports.registerUser = async(userData, req,res) => {
 }
 
 const saveUser = async(user, token) => {
+    console.log('in save')
     try {
         const result = await user.save();
         if (result) {
