@@ -10,7 +10,7 @@ module.exports.registerUser = async(userData, req,res) => {
     if (userData.password !== userData.password2) {
         res.send('Passwords do not match');
     }
-    const hash = await bcrypt.hash(userData.password, 10);
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
     userData.password = hash;
     const token = jwt.sign(
         { userId: userData.email },
