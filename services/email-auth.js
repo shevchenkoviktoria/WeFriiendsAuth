@@ -63,8 +63,9 @@ module.exports.checkUser = (userData) => {
 };
 
 module.exports.verifyUserEmail = async (confirmationCode) => {
+    console.log('in verify')
     try {
-        const user = await User.findOne({ confirmationCode });
+        const user = await User.findOne({ confirmationCode: confirmationCode });
         if (!user) {
           res.status(400).json({ message: "User not found" });
         }
