@@ -62,14 +62,11 @@ module.exports.checkUser = (userData) => {
   });
 };
 
-module.exports.verifyUserEmail = (confirmationCode) => {
-  return new Promise(function (resolve, reject) {
-    User.findOne({
-      confirmationCode: confirmationCode,
-    })
-      .then((user) => {
+module.exports.verifyUserEmail = async (confirmationCode) => {
+    try {
+        const user = await User.findOne({ confirmationCode });
         if (!user) {
-          reject("User Not found.");
+          res.status(400).json({ message: "User not found" });
         }
         const payload = {
           _id: user._id,
@@ -77,14 +74,48 @@ module.exports.verifyUserEmail = (confirmationCode) => {
         };
         const token = jwt.sign(payload, process.env.JWT_SECRET);
         user.status = "Active";
-        user.save((err) => {
-          if (err) {
-            reject({ message: err });
-          } else {
-            resolve(token);
-          }
-        });
-      })
-      .catch((err) => reject(err));
-  });
+        const result = await user.save();
+        if (result) {
+          res.status(200).json({ token });
+        }
+    } catch(e) {
+        res.status(400)
+    }
+  
+  //   user.save((err) => {
+  //     if (err) {
+  //       reject({ message: err });
+  //     } else {
+  //       resolve(token);
+  //     }
+  //   });
 };
+
+// module.exports.verifyUserEmail = async (confirmationCode) => {
+//   return new Promise(function (resolve, reject) {
+//     User.findOne({
+//       confirmationCode: confirmationCode,
+//     })
+//       .then((user) => {
+//         if (!user) {
+//           reject("User Not found.");
+//         }
+//         const payload = {
+//           _id: user._id,
+//           userId: user.userId,
+//         };
+//         const token = jwt.sign(payload, process.env.JWT_SECRET);
+//         user.status = "Active";
+//         // user.save();
+
+//         user.save((err) => {
+//           if (err) {
+//             reject({ message: err });
+//           } else {
+//             resolve(token);
+//           }
+//         });
+//       })
+//       .catch((err) => reject(err));
+//   });
+// };
