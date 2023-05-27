@@ -63,11 +63,10 @@ module.exports.checkUser = (userData) => {
 };
 
 module.exports.verifyUserEmail = async (confirmationCode) => {
-    console.log('in verify')
     try {
         const user = await User.findOne({ confirmationCode: confirmationCode });
         if (!user) {
-          res.status(400).json({ message: "User not found" });
+          return "User not found";
         }
         const payload = {
           _id: user._id,
@@ -78,10 +77,10 @@ module.exports.verifyUserEmail = async (confirmationCode) => {
         const result = await user.save();
         if (result) {
             console.log('in result ', result)
-          res.status(200).json({ token });
+          return token;
         }
     } catch(e) {
-        res.status(400)
+        console.log(e)
     }
   
   //   user.save((err) => {

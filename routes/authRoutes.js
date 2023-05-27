@@ -35,7 +35,7 @@ module.exports = (app) => {
         console.log("user is ", req.user)
             userService
                 .verifyUserEmail(req.params.confirmationCode)
-                .then((msg) => res.json({ message: msg }))
+                .then((msg) => res.json(msg))
                 .catch((msg) => {
                 res.status(422).json({ message: msg });
             });
