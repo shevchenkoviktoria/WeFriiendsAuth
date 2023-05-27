@@ -77,6 +77,7 @@ module.exports.verifyUserEmail = async (confirmationCode) => {
         user.status = "Active";
         const result = await user.save();
         if (result) {
+            console.log('in result ', result)
           res.status(200).json({ token });
         }
     } catch(e) {
