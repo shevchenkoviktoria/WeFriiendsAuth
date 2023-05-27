@@ -81,7 +81,7 @@ module.exports.verifyUserEmail = (confirmationCode) => {
           if (err) {
             reject({ message: err });
           } else {
-            resolve({ message: "Account has been activated", token });
+            resolve({ message: "Account has been activated", token: token });
           }
         });
       })
