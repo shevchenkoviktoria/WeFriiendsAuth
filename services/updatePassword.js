@@ -45,4 +45,4 @@ const updateUser = async (updatedUser) => {
   }
 };
 
-export default updatePassword;
+module.exports = {updatePassword};
