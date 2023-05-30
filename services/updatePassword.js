@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 let User = mongoose.model("users");
 
-const updatePassword = async (userData) => {
+const updatePassword = async (userData, req, res) => {
     console.log("in update password")
   const { email, password1, password2 } = userData;
   console.log(email, password1, password2)
