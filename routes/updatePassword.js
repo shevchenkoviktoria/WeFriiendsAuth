@@ -1,4 +1,4 @@
-import updatePassword from "../services/updatePassword";
+const updatePassword = require ("../services/updatePassword");
 
 module.exports = (app) => {
  
