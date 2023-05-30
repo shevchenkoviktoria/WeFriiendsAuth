@@ -17,14 +17,14 @@ const updatePassword = async (userData, res) => {
       .json({ success: false, msg: "Passwords do not match" });
   }
   const hashedPassword = await bcrypt.hash(password, 10);
-  const token = jwt.sign(
-    { userId: email },
-    "secret" // process.env.JWT_SECRET
-  );
+//   const token = jwt.sign(
+//     { userId: email },
+//     "secret" // process.env.JWT_SECRET
+//   );
   let updatedUser = {
     userId: userData.email,
     password: hashedPassword,
-    confirmationCode: token,
+  //  confirmationCode: token,
   };
   try {
     const result = await updateUser(updatedUser);
@@ -42,7 +42,7 @@ const updateUser = async (updatedUser) => {
       {
         $set: {
           password: updatedUser.password,
-          confirmationCode: updatedUser.confirmationCode,
+         // confirmationCode: updatedUser.confirmationCode,
         },
       }
     );
