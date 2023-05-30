@@ -26,12 +26,13 @@ const updatePassword = async (userData, res) => {
     password: hashedPassword,
     confirmationCode: token,
   };
-  updateUser(updatedUser);
+  const result = updateUser(updatedUser);
+  console.log("result ", result)
 };
 
-const updateUser = async (updatedUser, req, res) => {
+const updateUser = async (updatedUser) => {
   try {
-    await User.updateOne(
+    const result = await User.updateOne(
       { userId: updatedUser.userId },
       {
         $set: {
@@ -40,9 +41,9 @@ const updateUser = async (updatedUser, req, res) => {
         },
       }
     );
-    res.status(200);
+    return result;
   } catch (error) {
-    res.status(400);
+    return error.status
   }
 };
 
