@@ -26,7 +26,7 @@ const updatePassword = async (userData, res) => {
     password: hashedPassword,
     confirmationCode: token,
   };
-  const result = updateUser(updatedUser);
+  const result = await updateUser(updatedUser);
   console.log("result ", result)
 };
 
