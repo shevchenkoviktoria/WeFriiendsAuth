@@ -5,6 +5,7 @@ let User = mongoose.model("users");
 
 const updatePassword = async () => {
   const { email, password1, password2 } = req.body;
+  console.log(email, password1, password2)
   const user = await User.findOne({ userId: email });
   if (!user) {
     return res.status(400).send("User doesn't exist");
