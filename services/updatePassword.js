@@ -29,7 +29,7 @@ const updatePassword = async (userData, res) => {
   updateUser(updatedUser);
 };
 
-const updateUser = async (updatedUser) => {
+const updateUser = async (updatedUser, req, res) => {
   try {
     await User.updateOne(
       { userId: updatedUser.userId },
