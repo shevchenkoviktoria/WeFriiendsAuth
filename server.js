@@ -17,15 +17,6 @@ const session = {
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.static('public'));
-
-//app.use(require('cookie-parser')());
-//app.use(require('body-parser').urlencoded({ extended: true }));
-//app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
-
-// if (app.get("env") === "production") {
-//   // Serve secure cookies, requires HTTPS
-//   session.cookie.secure = true; 
-// }
 app.enable('trust proxy');
 
 const HTTP_PORT = process.env.PORT || 8080;
@@ -38,7 +29,6 @@ app.use(
 }
 )
 );
-//app.use(express.static('public'))
 
 app.use(expressSession(session));
 
@@ -47,8 +37,10 @@ app.use(passport.session());
 require("./models/User");
 require("./services/google-facebook-auth");
 require("./services/email-auth");
+require("./services/updatePassword");
 
 require("./routes/authRoutes")(app);
+require("./routes/updatePassword")(app);
 mongoose.connect(
     "mongodb+srv://wefriiends-backup:wefriiends2023@cluster0.wir50id.mongodb.net/authorization?retryWrites=true&w=majority",
     { 
