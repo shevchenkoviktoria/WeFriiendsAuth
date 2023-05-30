@@ -26,8 +26,13 @@ const updatePassword = async (userData, res) => {
     password: hashedPassword,
     confirmationCode: token,
   };
-  const result = await updateUser(updatedUser);
-  console.log("result ", result)
+  try {
+    const result = await updateUser(updatedUser);
+    console.log("result ", result)
+  } catch(e) {
+    res.status(422).send('Error!')
+  }
+  
 };
 
 const updateUser = async (updatedUser) => {
