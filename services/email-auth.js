@@ -6,7 +6,6 @@ let User = mongoose.model("users");
 const { v4: uuidv4 } = require("uuid");
 
 module.exports.registerUser = async (userData, req, res) => {
-  console.log("in register user");
   if (userData.password !== userData.password2) {
     res.send("Passwords do not match");
   }
@@ -17,8 +16,7 @@ module.exports.registerUser = async (userData, req, res) => {
     password: hashedPassword,
     confirmationCode,
   });
-  console.log("user ", userToSave);
-
+ 
   const response = await saveUser(userToSave, confirmationCode);
   return response;
 };
@@ -76,47 +74,9 @@ module.exports.verifyUserEmail = async (confirmationCode) => {
         user.status = "Active";
         const result = await user.save();
         if (result) {
-            console.log('in result ', result)
           return token;
         }
     } catch(e) {
         console.log(e)
     }
-  
-  //   user.save((err) => {
-  //     if (err) {
-  //       reject({ message: err });
-  //     } else {
-  //       resolve(token);
-  //     }
-  //   });
 };
-
-// module.exports.verifyUserEmail = async (confirmationCode) => {
-//   return new Promise(function (resolve, reject) {
-//     User.findOne({
-//       confirmationCode: confirmationCode,
-//     })
-//       .then((user) => {
-//         if (!user) {
-//           reject("User Not found.");
-//         }
-//         const payload = {
-//           _id: user._id,
-//           userId: user.userId,
-//         };
-//         const token = jwt.sign(payload, process.env.JWT_SECRET);
-//         user.status = "Active";
-//         // user.save();
-
-//         user.save((err) => {
-//           if (err) {
-//             reject({ message: err });
-//           } else {
-//             resolve(token);
-//           }
-//         });
-//       })
-//       .catch((err) => reject(err));
-//   });
-// };
