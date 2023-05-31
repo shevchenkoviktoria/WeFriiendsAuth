@@ -12,7 +12,7 @@ const updatePassword = async (req, res) => {
   }
   if (password !== password2) {
     return res
-      .status(400)
+      .status(422)
       .json({ success: false, msg: "Passwords do not match" });
   }
   const hashedPassword = await bcrypt.hash(password, 10);
