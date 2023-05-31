@@ -12,8 +12,7 @@ const updatePassword = async (req, res) => {
   }
   if (password !== password2) {
     return res
-      .status(422)
-      .json({ success: false, msg: "Passwords do not match" });
+    .send("User doesn't exist");
   }
   const hashedPassword = await bcrypt.hash(password, 10);
   let updatedUser = {
