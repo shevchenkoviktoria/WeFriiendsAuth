@@ -3,8 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 let User = mongoose.model("users");
 
-const updatePassword = async (userData, res) => {
-  const { email, password, password2 } = userData;
+const updatePassword = async (req, res) => {
+  const { email, password, password2 } = req.body;
 
   const user = await User.findOne({ userId: email });
   if (!user) {
