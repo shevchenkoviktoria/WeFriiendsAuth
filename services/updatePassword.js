@@ -4,9 +4,8 @@ const jwt = require("jsonwebtoken");
 let User = mongoose.model("users");
 
 const updatePassword = async (userData, res) => {
-  console.log("in update password");
   const { email, password, password2 } = userData;
-  console.log(email, password, password2);
+
   const user = await User.findOne({ userId: email });
   if (!user) {
     return res.status(400).send("User doesn't exist");
@@ -17,22 +16,15 @@ const updatePassword = async (userData, res) => {
       .json({ success: false, msg: "Passwords do not match" });
   }
   const hashedPassword = await bcrypt.hash(password, 10);
-//   const token = jwt.sign(
-//     { userId: email },
-//     "secret" // process.env.JWT_SECRET
-//   );
   let updatedUser = {
     userId: userData.email,
     password: hashedPassword,
-  //  confirmationCode: token,
   };
   try {
     const result = await updateUser(updatedUser);
-    console.log("result ", result)
-  } catch(e) {
-    res.status(422).send('Error!')
+  } catch (e) {
+    res.status(422).send("Error!");
   }
-  
 };
 
 const updateUser = async (updatedUser) => {
@@ -42,13 +34,12 @@ const updateUser = async (updatedUser) => {
       {
         $set: {
           password: updatedUser.password,
-         // confirmationCode: updatedUser.confirmationCode,
         },
       }
     );
     return result;
   } catch (error) {
-    return error.status
+    return error.status;
   }
 };
 

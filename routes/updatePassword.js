@@ -1,9 +1,8 @@
-const updatePassword = require ("../services/updatePassword");
+const controller = require ("../services/updatePassword");
 
 module.exports = (app) => {
  
   app.patch("/api/auth/updatePassword", (req, res) => {
-    console.log(" in route")
-    updatePassword.updatePassword(req.body);
+    controller.updatePassword(req.body);
   });
 };
