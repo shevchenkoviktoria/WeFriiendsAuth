@@ -12,9 +12,9 @@ const session = {
     resave: false ,
     saveUninitialized: true,
  //   saveUninitialized: false ,
-  //  cookie: { maxAge: 60*60*1000, sameSite: 'none',
-  //  secure: true
-         //   }
+   cookie: { maxAge: 60*60*1000, sameSite: 'none',
+   secure: true
+           }
 }
 
 app.use(express.static(__dirname + '/public'));
