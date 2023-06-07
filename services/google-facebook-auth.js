@@ -4,7 +4,6 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 const mongoose = require("mongoose");
 const User = mongoose.model("users");
 
-//Google Auth
 passport.use(
     new GoogleStrategy({
         clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
@@ -18,11 +17,9 @@ passport.use(
                   }, {
                     'googleId': profile.id
             }]});
-        if (userFound) {
-            console.log("existing user")
+        if (userFound) {           
             done(null, userFound);
-        } else {
-            console.log("about to add a new user ")
+        } else {            
             const userToSave = new User({
                 userId: profile.emails[0].value,
                 googleId: profile.id,
@@ -43,6 +40,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(function(id, done) {
+    console.log('deserialized called')
   User.findById(id, function (err, user) {
     done(err, user);
   });
