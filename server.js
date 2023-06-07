@@ -10,9 +10,11 @@ const expressSession = require('express-session')
 const session = {
     secret: "secret",
     resave: false ,
-    saveUninitialized: false ,
-    cookie: { maxAge: 60*60*1000, sameSite: 'none',
-    secure: true}
+    saveUninitialized: true,
+ //   saveUninitialized: false ,
+  //  cookie: { maxAge: 60*60*1000, sameSite: 'none',
+  //  secure: true
+            }
 }
 
 app.use(express.static(__dirname + '/public'));
