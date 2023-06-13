@@ -36,28 +36,26 @@ const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
         type: 'OAuth2',
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASSWORD,
+        user: 'wefriiends.confirm@gmail.com', //process.env.GMAIL_USER,
+        pass: 'grdbxdfdcosvawmq', //process.env.GMAIL_PASSWORD,
         tls: {
             rejectUnauthorized: false
         },
-        clientId: process.env.GMAIL_CLIENT_ID,
-        clientSecret: process.env.GMAIL_CLIENT_SECRET,
-        refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+        clientId: '210634566521-2262ne8kng6fvkb7l9dndqgvfp4n996a.apps.googleusercontent.com',  // process.env.GMAIL_CLIENT_ID,
+        clientSecret: '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',  //process.env.GMAIL_CLIENT_SECRET,
+        refreshToken: '1//04lSDBBcW5HvqCgYIARAAGAQSNwF-L9Irz9gRwj9oc0JTzjELTJZ_1c7B8en9K8G6R6FV0GMjudrwJ5wBKybm_oarqV65-j-YheA', //process.env.GMAIL_REFRESH_TOKEN,
         accessToken
     },
 })
 return transporter;
 }
 
-
-
 module.exports.sendConfirmationEmail = async(email, confirmationCode) => {
     console.log('in nodemailer')
     let emailTransporter = await createTransporter();
     const info = await emailTransporter
         .sendMail({
-            from: process.env.GMAIL_USER,    
+            from: 'wefriiends.confirm@gmail.com', //process.env.GMAIL_USER,    
             to: email,
             subject: "Please confirm your email",
             html: `<div><img src="https://res.cloudinary.com/e-bechmanis/image/upload/v1671245485/Group63_zlw4bt.png" alt="logo" style="display:inline-block;width:225px;margin-bottom:2rem">

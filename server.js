@@ -3,22 +3,22 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
+const cookieParser = require('cookie-parser');
 const passport = require("passport");
 const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
 const expressSession = require('express-session')
 const session = {
     secret: "secret",
-    resave: false ,
-    saveUninitialized: true,
- //   saveUninitialized: false ,
-   cookie: { maxAge: 60*60*1000, sameSite: 'none',
-   secure: true
-           }
+    resave: true ,
+    saveUninitialized: true ,
+    cookie: { 
+        maxAge: 60*60*1000, 
+    //    sameSite: 'none',
+    //secure: false
+}
 }
 
-app.use(express.static(__dirname + '/public'));
-app.use(express.static('public'));
 app.enable('trust proxy');
 
 const HTTP_PORT = process.env.PORT || 8080;
@@ -33,7 +33,7 @@ app.use(
 );
 
 app.use(expressSession(session));
-
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 require("./models/User");
