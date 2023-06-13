@@ -10,8 +10,8 @@ const oneDay = 1000 * 60 * 60 * 24;
 const expressSession = require('express-session')
 const session = {
     secret: "secret",
-    resave: true ,
-    saveUninitialized: true ,
+    resave: false ,
+    saveUninitialized: false ,
     cookie: { 
         maxAge: 60*60*1000, 
         sameSite: 'none',
