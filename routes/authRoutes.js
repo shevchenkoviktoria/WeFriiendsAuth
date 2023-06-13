@@ -3,8 +3,7 @@ const jwt = require("jsonwebtoken");
 const userService = require("../services/email-auth.js");
 
 module.exports = (app) => {
-  // ================    Email auth routes ======================== //
-  
+
     app.post("/api/auth/register", (req, res) => {
         userService
             .registerUser(req.body)
@@ -23,7 +22,7 @@ module.exports = (app) => {
                     _id: user._id,
                     userId: user.userId,
                 };
-                let token = jwt.sign(payload, process.env.JWT_SECRET);
+                let token = jwt.sign(payload, 'secret');
                 res.json({ message: "login successful", token: token });
             })
             .catch((msg) => {
@@ -79,7 +78,7 @@ module.exports = (app) => {
     app.get("/api/auth/google/callback", passport.authenticate(
         'google', 
         { 
-            successRedirect: 'http://localhost:3000/registration/glad-screen', 
+            successRedirect: 'http://localhost:3000/registration/glad-screen/undefined', 
             failureRedirect: "/api/auth/login/failed",
         }),
     );
