@@ -14,7 +14,7 @@ const session = {
     saveUninitialized: false ,
     cookie: { 
         maxAge: 60*60*1000, 
-        sameSite: 'none',
+  //      sameSite: 'none',
    // secure: false
 }
 }
