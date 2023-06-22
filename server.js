@@ -30,8 +30,6 @@ const expSession = {
     //    sameSite: 'none',
     //secure: false
 }
-}
-
 
 //app.enable('trust proxy');
 
