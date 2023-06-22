@@ -43,7 +43,7 @@ module.exports = (app) => {
   // ====================  Google auth routes =========================== //
     app.get(
         "/api/auth/google", 
-        passport.authenticate("google", { scope: ["email", "profile"], session:false  })
+        passport.authenticate("google", { scope: ["email", "profile"]  })
     );
     
     app.get("/api/auth/login/failed", (req,res) => {
