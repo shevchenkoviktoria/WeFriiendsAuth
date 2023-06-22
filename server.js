@@ -7,19 +7,23 @@ const cookieParser = require('cookie-parser');
 const passport = require("passport");
 const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
-const expressSession = require('express-session')
+//const expressSession = require('express-session')
+var cookieSession = require('cookie-session')
 const session = {
-    secret: "secret",
-    resave: false ,
-    saveUninitialized: false ,
-    cookie: { 
-        maxAge: 60*60*1000, 
-        sameSite: 'none',
+    name: 'session',
+    keys: ['secret'],
+    maxAge: 60*60*1000, 
+    // secret: "secret",
+    // resave: true ,
+    // saveUninitialized: true ,
+    // cookie: { 
+    //     maxAge: 60*60*1000, 
+    //    sameSite: 'none',
     //secure: false
 }
-}
 
-app.enable('trust proxy');
+
+//app.enable('trust proxy');
 
 const HTTP_PORT = process.env.PORT || 8080;
 
