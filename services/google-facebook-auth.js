@@ -6,8 +6,8 @@ const User = mongoose.model("users");
 
 passport.use(
     new GoogleStrategy({
-        clientID: '681911775744-38tdbjb6qsrejqre35ce5ems8sg7hnje.apps.googleusercontent.com',  //process.env.GOOGLE_AUTH_CLIENT_ID,
-        clientSecret: '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',  //process.env.GOOGLE_AUTH_SECRET,
+        clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_AUTH_SECRET,
         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",      
     },
     async (accessToken, refreshToken, profile, done) => {       
@@ -31,6 +31,27 @@ passport.use(
         }
     }
   )
+
+  //          (accessToken, refreshToken, profile, done) => {
+     
+  //     // check if user id already exists
+  //       User.findOne({ userId: profile.id }).then((existingUser) => {
+  //           if (existingUser) {
+  //           done(null, existingUser);
+  //           } else {
+  //         // adding new user
+  //               new User({
+  //                   userId: profile.id,
+  //                   status: "Active",
+  //               })
+  //               .save()
+  //               .then((user) => {
+  //                   done(null, user);
+  //               });
+  //           }
+  //       });
+  //   }
+  // )            
 );
 
 passport.serializeUser((user, done) => {
