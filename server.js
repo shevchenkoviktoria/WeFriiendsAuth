@@ -19,7 +19,7 @@ const session = {
 }
 }
 
-app.enable('trust proxy');
+//app.enable('trust proxy');
 
 const HTTP_PORT = process.env.PORT || 8080;
 
