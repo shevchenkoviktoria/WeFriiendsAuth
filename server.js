@@ -21,7 +21,7 @@ const session = {
     //    sameSite: 'none',
     //secure: false
 }
-const expressSession = {
+const expSession = {
      // secret: "secret",
     // resave: true ,
     // saveUninitialized: true ,
@@ -46,7 +46,7 @@ app.use(
 )
 );
 
-app.use(expressSession(expressSession));
+app.use(expressSession(expSession));
 //app.use(cookieSession(session));
 app.use(cookieParser());
 app.use(passport.initialize());
