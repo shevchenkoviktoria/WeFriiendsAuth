@@ -10,48 +10,48 @@ passport.use(
         clientSecret: process.env.GOOGLE_AUTH_SECRET,
         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",      
     },
-  //   async (accessToken, refreshToken, profile, done) => {       
-  //       const userFound = await User.findOne({
-  //           $or: [{
-  //                   'userId': profile.emails[0].value
-  //                 }, {
-  //                   'googleId': profile.id
-  //           }]});
-  //       if (userFound) {           
-  //           done(null, userFound);
-  //       } else {            
-  //           const userToSave = new User({
-  //               userId: profile.emails[0].value,
-  //               googleId: profile.id,
-  //               status: "Active",
-  //               confirmationCode: "code" + profile.id
-  //           });
-  //           const user = await userToSave.save();
-  //           done (null, user)
-  //       }
-  //   }
-  // )
-
-           (accessToken, refreshToken, profile, done) => {
-     
-      // check if user id already exists
-        User.findOne({ userId: profile.id }).then((existingUser) => {
-            if (existingUser) {
-            done(null, existingUser);
-            } else {
-          // adding new user
-                new User({
-                    userId: profile.id,
-                    status: "Active",
-                })
-                .save()
-                .then((user) => {
-                    done(null, user);
-                });
-            }
-        });
+    async (accessToken, refreshToken, profile, done) => {       
+        const userFound = await User.findOne({
+            $or: [{
+                    'userId': profile.emails[0].value
+                  }, {
+                    'googleId': profile.id
+            }]});
+        if (userFound) {           
+            done(null, userFound);
+        } else {            
+            const userToSave = new User({
+                userId: profile.emails[0].value,
+                googleId: profile.id,
+                status: "Active",
+                confirmationCode: "code" + profile.id
+            });
+            const user = await userToSave.save();
+            done (null, user)
+        }
     }
-  )            
+  )
+
+  //          (accessToken, refreshToken, profile, done) => {
+     
+  //     // check if user id already exists
+  //       User.findOne({ userId: profile.id }).then((existingUser) => {
+  //           if (existingUser) {
+  //           done(null, existingUser);
+  //           } else {
+  //         // adding new user
+  //               new User({
+  //                   userId: profile.id,
+  //                   status: "Active",
+  //               })
+  //               .save()
+  //               .then((user) => {
+  //                   done(null, user);
+  //               });
+  //           }
+  //       });
+  //   }
+  // )            
 );
 
 passport.serializeUser((user, done) => {
