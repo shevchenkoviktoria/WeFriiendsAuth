@@ -12,7 +12,14 @@ var cookieSession = require('cookie-session')
 const session = {
     name: 'session',
     keys: ['secret'],
-    maxAge: 60*60*1000, 
+   // maxAge: 60*60*1000, 
+     cookie: {
+ //  secure: true,
+  //  httpOnly: true,
+ //   domain: 'example.com',
+//    path: 'foo/bar',
+    expires: 60*60*1000
+  }
      // secret: "secret",
     // resave: true ,
     // saveUninitialized: true ,
@@ -44,8 +51,8 @@ app.use(
 )
 );
 
-app.use(expressSession(expSession));
-//app.use(cookieSession(session));
+//app.use(expressSession(expSession));
+app.use(cookieSession(session));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
