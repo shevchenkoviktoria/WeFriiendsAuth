@@ -11,6 +11,7 @@ passport.use(
         callbackURL: "https://clumsy-glasses-clam.cyclic.app/api/auth/google/callback",      
     },
     async (accessToken, refreshToken, profile, done) => {       
+        console.log('in strategy')
         const userFound = await User.findOne({
             $or: [{
                     'userId': profile.emails[0].value
