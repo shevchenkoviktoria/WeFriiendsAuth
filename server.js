@@ -29,7 +29,7 @@ const expSession = {
          maxAge: 60*60*1000, 
         sameSite: 'none',
     //secure: false
-}
+}}
 
 //app.enable('trust proxy');
 
