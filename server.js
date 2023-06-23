@@ -13,7 +13,7 @@ const session = {
     name: 'session',
     keys: ['secret'],
     maxAge: 60*60*1000, 
-    // secret: "secret",
+     // secret: "secret",
     // resave: true ,
     // saveUninitialized: true ,
     // cookie: { 
@@ -22,12 +22,12 @@ const session = {
     //secure: false
 }
 const expSession = {
-     // secret: "secret",
-    // resave: true ,
-    // saveUninitialized: true ,
-    // cookie: { 
-    //     maxAge: 60*60*1000, 
-    //    sameSite: 'none',
+      secret: "secret",
+     resave: true ,
+     saveUninitialized: true ,
+     cookie: { 
+         maxAge: 60*60*1000, 
+        sameSite: 'none',
     //secure: false
 }
 
