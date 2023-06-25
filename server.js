@@ -45,7 +45,7 @@ app.use(
 );
 
 app.use(expressSession(expSession));
-app.use(cookieSession(session));
+//app.use(cookieSession(session));
 //app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
