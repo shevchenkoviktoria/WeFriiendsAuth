@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
-const cookieParser = require('cookie-parser');
+//const cookieParser = require('cookie-parser');
 const passport = require("passport");
 const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
@@ -53,7 +53,7 @@ app.use(
 
 //app.use(expressSession(expSession));
 app.use(cookieSession(session));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 require("./models/User");
