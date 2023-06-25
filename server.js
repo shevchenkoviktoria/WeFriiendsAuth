@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
-const cookieParser = require('cookie-parser');
+//const cookieParser = require('cookie-parser');
 const passport = require("passport");
 const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
@@ -16,7 +16,16 @@ const session = {
    secret: 'secret',
    cookie: {}
 }
-
+const expSession = {
+      secret: "secret",
+     resave: true ,
+     saveUninitialized: true ,
+     cookie: { 
+         maxAge: 60*60*1000, 
+        sameSite: 'none',
+         httpOnly: false
+    //secure: false
+}}
 
 //app.enable('trust proxy');
 if (app.get('env') === 'production') {
@@ -35,7 +44,7 @@ app.use(
 )
 );
 
-//app.use(expressSession(session));
+app.use(expressSession(expSession));
 app.use(cookieSession(session));
 //app.use(cookieParser());
 app.use(passport.initialize());
