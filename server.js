@@ -35,6 +35,7 @@ const expSession = {
      cookie: { 
          maxAge: 60*60*1000, 
         sameSite: 'none',
+         httpOnly: false
     //secure: false
 }}
 
