@@ -14,7 +14,13 @@ const session = {
     // keys: ['secret'],
     // maxAge: 60*60*1000, 
    secret: 'secret',
-   cookie: {}
+      resave: true ,
+     saveUninitialized: true ,
+   cookie: {
+        maxAge: 60*60*1000, 
+        sameSite: 'none',
+         httpOnly: false
+   }
 }
 const expSession = {
       secret: "secret",
