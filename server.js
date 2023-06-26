@@ -32,12 +32,12 @@ const expSession = {
          httpOnly: false
     //secure: false
 }}
-
+  app.set('trust proxy', 1) 
 //app.enable('trust proxy');
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1) // trust first proxy
- // sess.cookie.secure = true // serve secure cookies
-}
+// if (app.get('env') === 'production') {
+//   app.set('trust proxy', 1) // trust first proxy
+//  // sess.cookie.secure = true // serve secure cookies
+// }
 
 const HTTP_PORT = process.env.PORT || 8080;
 
