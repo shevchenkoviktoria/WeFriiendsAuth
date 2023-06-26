@@ -3,12 +3,12 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
-//const cookieParser = require('cookie-parser');
+
 const passport = require("passport");
 const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
-//const expressSession = require('express-session')
-var cookieSession = require('cookie-session');
+const expressSession = require('express-session')
+//var cookieSession = require('cookie-session');
 const session = {
     name: 'session',
     keys: ['secret'],
@@ -32,12 +32,12 @@ const expSession = {
          httpOnly: false
     //secure: false
 }}
-
+  app.set('trust proxy', 1) 
 //app.enable('trust proxy');
-if (app.get('env') === 'production') {
-  app.set('trust proxy', 1) // trust first proxy
- // sess.cookie.secure = true // serve secure cookies
-}
+// if (app.get('env') === 'production') {
+//   app.set('trust proxy', 1) // trust first proxy
+//  // sess.cookie.secure = true // serve secure cookies
+// }
 
 const HTTP_PORT = process.env.PORT || 8080;
 
