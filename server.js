@@ -7,8 +7,8 @@ dotenv.config();
 const passport = require("passport");
 const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
-//const expressSession = require('express-session')
-var cookieSession = require('cookie-session');
+const expressSession = require('express-session')
+//var cookieSession = require('cookie-session');
 const session = {
     // name: 'session',
     // keys: ['secret'],
