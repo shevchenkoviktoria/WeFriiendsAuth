@@ -10,11 +10,17 @@ const oneDay = 1000 * 60 * 60 * 24;
 //const expressSession = require('express-session')
 var cookieSession = require('cookie-session');
 const session = {
-    // name: 'session',
-    // keys: ['secret'],
-    // maxAge: 60*60*1000, 
-   secret: 'secret',
-   cookie: {}
+    name: 'session',
+    keys: ['secret'],
+    maxAge: 60*60*1000, 
+//    secret: 'secret',
+//    resave: true ,
+//    saveUninitialized: true ,
+//    cookie: {
+//     maxAge: 60*60*1000, 
+//     sameSite: 'none',
+//      httpOnly: false
+//    }
 }
 const expSession = {
       secret: "secret",
@@ -44,7 +50,7 @@ app.use(
 )
 );
 
-app.use(expressSession(expSession));
+//app.use(expressSession(session));
 app.use(cookieSession(session));
 //app.use(cookieParser());
 app.use(passport.initialize());
