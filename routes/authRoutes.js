@@ -31,7 +31,6 @@ module.exports = (app) => {
     });
 
     app.get("/api/auth/confirm/:confirmationCode", (req, res) => {
-        console.log("user is ", req.user)
             userService
                 .verifyUserEmail(req.params.confirmationCode)
                 .then((msg) => res.json(msg))

@@ -8,7 +8,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 const oneDay = 1000 * 60 * 60 * 24;
 const expressSession = require('express-session')
-//var cookieSession = require('cookie-session');
+var cookieSession = require('cookie-session');
 const session = {
     name: 'session',
     keys: ['secret'],
@@ -52,7 +52,7 @@ app.use(
 
 //app.use(expressSession(session));
 app.use(cookieSession(session));
-//app.use(cookieParser());
+
 app.use(passport.initialize());
 app.use(passport.session());
 require("./models/User");
