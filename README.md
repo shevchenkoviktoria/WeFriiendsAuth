@@ -2,8 +2,8 @@
 
 This service has a function of adding new users to the users pool by having them follow one of 3 options:
 * Email
-* Facebook
-* Gmail
+* Facebook - not working
+* Gmail - not working
 
 It adds new users to MongoDB database, and retrieves information/confirms if user with requested email is in the user pool.
 
