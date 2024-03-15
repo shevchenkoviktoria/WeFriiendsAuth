@@ -1,11 +1,26 @@
 # User Auth Service  WIP repo (cloned)
 
-This service has a function of adding new users to the users pool by having them follow one of 3 options:
-* Email
-* Facebook - not working
-* Gmail - not working
+The User Authentication Service provides functionality for adding new users to the user pool through various authentication methods, including Email, Facebook, Google, and Gmail. It interacts with MongoDB to store user data and utilizes **bcrypt** for password hashing.
 
-It adds new users to MongoDB database, and retrieves information/confirms if user with requested email is in the user pool.
+After successful authentication, the service issues JWT tokens containing digitally signed user information, excluding the password, which are subsequently used for authorization in the "Authorization" header of requests to the server.
+
+Thank you for considering contributing to our project! Here's how you can **get started**:
+
+# Setup:
+
+1. Clone the repository to your local machine. 
+2. Navigate to the project directory.
+3. Install dependencies using ```npm install```
+5. Ensure you have access to necessary databases or external services.
+6. Starts the server by running in the terminal ```npm start``` 
+7. Access the API endpoints locally at http://localhost:8080.
+
+# GitHub Packages:
+
+Programming languages: **JavaScript (Node.js)**
+Frameworks: **Express.js**
+Dependencies: **bcrypt**, **jsonwebtoken**, **mongoose**
+
 
 **bcrypt** is used for password hashing for users who authenticate via email
 
@@ -15,7 +30,7 @@ After user has been successfully authenticated, **JWT** token is sent back with 
 
 **/api/auth/register** 
 
-POST route, accepts JSON object containing user email and 2 passwords, adds user to the user pool if email is unique (doesn't already exist in the database) and passwords match. New user is added with "Pending" status pending confirmation of email.
+POST route, accepts JSON object containing user email and 2 passwords, adds user to the user pool if email is unique (doesn't already exist in the database) and passwords match. A new user is added with "Pending" status pending email confirmation.
 
 **Params**
 
