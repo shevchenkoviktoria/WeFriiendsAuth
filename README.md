@@ -1,11 +1,25 @@
 # User Auth Service  WIP repo (cloned)
+The User Authentication Service provides functionality for adding new users to the user pool through various authentication methods, including Email and Google. It interacts with MongoDB to store user data and utilizes **bcrypt** for password hashing.
 
-This service has a function of adding new users to the users pool by having them follow one of 3 options:
-* Email
-* Facebook - not working
-* Gmail - not working
+After successful authentication, the service issues JWT tokens containing digitally signed user information, excluding the password, which are subsequently used for authorization in the "Authorization" header of requests to the server.
 
-It adds new users to MongoDB database, and retrieves information/confirms if user with requested email is in the user pool.
+Thank you for considering contributing to our project! Here's how you can **get started**:
+
+# Setup:
+
+1. Clone the repository to your local machine. 
+2. Navigate to the VS Code or other code editor.
+3. Install dependencies using ```npm install```
+5. Ensure you have access to necessary databases or external services.
+6. Create new branch from latest master  ```git checkout -b branch-name```
+7. Starts the server by running in the terminal ```npm start``` 
+8. Access the API endpoints locally at http://localhost:8080.
+
+# GitHub Packages:
+
+Programming languages: **JavaScript (Node.js)**
+Frameworks: **Express.js**
+Dependencies: **bcrypt**, **jsonwebtoken**, **mongoose**
 
 **bcrypt** is used for password hashing for users who authenticate via email
 
