@@ -1,5 +1,5 @@
 # User Auth Service  WIP repo (cloned)
-The User Authentication Service provides functionality for adding new users to the user pool through various authentication methods, including Email, Facebook, Google, and Gmail. It interacts with MongoDB to store user data and utilizes **bcrypt** for password hashing.
+The User Authentication Service provides functionality for adding new users to the user pool through various authentication methods, including Email and Google. It interacts with MongoDB to store user data and utilizes **bcrypt** for password hashing.
 
 After successful authentication, the service issues JWT tokens containing digitally signed user information, excluding the password, which are subsequently used for authorization in the "Authorization" header of requests to the server.
 
